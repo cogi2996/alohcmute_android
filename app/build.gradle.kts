@@ -30,7 +30,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
@@ -50,8 +49,10 @@ dependencies {
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.bom)
     implementation(libs.firebase.iid)
+    implementation(libs.lombok)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     annotationProcessor(libs.compiler)
+    annotationProcessor(libs.lombok)
 }
