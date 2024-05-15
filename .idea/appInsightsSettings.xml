@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.instagramapp" />
-                  <option name="mobileSdkAppId" value="1:564806370837:android:a88ddc5294cada0225701c" />
-                  <option name="projectId" value="instagramapp-9a9c6" />
-                  <option name="projectNumber" value="564806370837" />
+                  <option name="mobileSdkAppId" value="1:789927769464:android:23d8976ce451d6d579448d" />
+                  <option name="projectId" value="instagramapp-c6ecd" />
+                  <option name="projectNumber" value="789927769464" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
