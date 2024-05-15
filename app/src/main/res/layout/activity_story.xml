@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Stories.StoryActivity">
+
+    <ImageView
+        android:id="@+id/ActivityStory_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/ActivityStory_reverse"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <View
+            android:id="@+id/ActivityStory_skip"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <!--    <jp.shts.android.storiesprogressview.StoriesProgressView-->
+    <!--        android:id="@+id/ActivityStory_storiesProgrsssView"-->
+    <!--        android:paddingLeft="8dp"-->
+    <!--        android:paddingRight="8dp"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="3dp"-->
+    <!--        android:layout_gravity="top"-->
+    <!--        android:layout_marginTop="8dp" />-->
+    <!-- activity_story.xml -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- Other views -->
+<!--        // Replace with your actual ProgressBar id-->
+        <ProgressBar android:id="@+id/ActivityStory_storiesProgrsssView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ActivityStory_storiesProgrsssView"
+        android:layout_margin="10dp"
+        tools:ignore="NotSibling">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ActivityStory_story_photo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/ActivityStory_story_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:layout_toEndOf="@id/ActivityStory_story_photo"
+            android:text="username"
+            android:textColor="#fff"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ActivityStory_r_seen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="#20000000"
+        android:orientation="horizontal"
+        android:padding="3dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_story_view" />
+
+        <TextView
+            android:id="@+id/ActivityStory_seen_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:text="0"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ActivityStory_story_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="#20000000"
+        android:padding="3dp"
+        android:src="@drawable/ic_story_delete" />
+
+</RelativeLayout>
