@@ -23,7 +23,7 @@ import java.util.List;
 
 import com.example.instagramapp.Messages.Adapter.FriendsAdapter;
 import com.example.instagramapp.R;
-import com.example.instagramapp.models.Users;
+import com.example.instagramapp.modelFirebase.Users;
 
 
 public class FriendsFragment extends Fragment {
