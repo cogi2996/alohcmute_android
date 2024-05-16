@@ -1,4 +1,4 @@
-package com.example.instagramapp.models;
+package com.example.instagramapp.ModelAPI;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package com.example.instagramapp.retrofit;
 
-import com.example.instagramapp.models.AuthenticationRequest;
-import com.example.instagramapp.models.AuthenticationResponse;
+import com.example.instagramapp.ModelAPI.AuthenticationRequest;
+import com.example.instagramapp.ModelAPI.AuthenticationResponse;
 import com.example.instagramapp.models.ResponseDTO;
 
 import retrofit2.Call;
