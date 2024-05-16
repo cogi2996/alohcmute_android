@@ -22,8 +22,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.List;
 
 import com.example.instagramapp.R;
-import com.example.instagramapp.modelFirebase.Notification;
-import com.example.instagramapp.modelFirebase.Users;
+import com.example.instagramapp.models.Notification;
+import com.example.instagramapp.models.Users;
 
 public class LikeNotificationAdapter extends RecyclerView.Adapter<LikeNotificationAdapter.ViewHolder>{
 

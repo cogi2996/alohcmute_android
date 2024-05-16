@@ -20,7 +20,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import com.example.instagramapp.R;
 import com.example.instagramapp.Search.UserSearchProfileActivity;
-import com.example.instagramapp.modelFirebase.Users;
+import com.example.instagramapp.models.Users;
 
 public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.ViewHolder> {
 

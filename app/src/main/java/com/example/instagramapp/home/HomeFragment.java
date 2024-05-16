@@ -36,9 +36,9 @@ import com.example.instagramapp.R;
 import com.example.instagramapp.Stories.StoryAdapter;
 import com.example.instagramapp.Utils.HomeFragmentPostViewListAdapter;
 import com.example.instagramapp.Utils.UniversalImageLoader;
-import com.example.instagramapp.modelFirebase.Comments;
-import com.example.instagramapp.modelFirebase.Photo;
-import com.example.instagramapp.modelFirebase.Story;
+import com.example.instagramapp.models.Comments;
+import com.example.instagramapp.models.Photo;
+import com.example.instagramapp.models.Story;
 
 public class HomeFragment extends Fragment {
 
