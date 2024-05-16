@@ -29,8 +29,8 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import com.example.instagramapp.R;
-import com.example.instagramapp.models.Comments;
-import com.example.instagramapp.models.Users;
+import com.example.instagramapp.modelFirebase.Comments;
+import com.example.instagramapp.modelFirebase.Users;
 
 public class CommentListAdapter extends ArrayAdapter<Comments> {
 

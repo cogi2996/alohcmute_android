@@ -28,7 +28,7 @@ import com.example.instagramapp.Messages.Adapter.FriendsAdapter;
 import com.example.instagramapp.Messages.Model.Chat;
 import com.example.instagramapp.Messages.Notification.Token;
 import com.example.instagramapp.R;
-import com.example.instagramapp.models.Users;
+import com.example.instagramapp.modelFirebase.Users;
 
 
 public class ChatsFragment extends Fragment {

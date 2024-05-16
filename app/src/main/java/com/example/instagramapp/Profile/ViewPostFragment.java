@@ -37,9 +37,9 @@ import com.example.instagramapp.R;
 import com.example.instagramapp.Utils.Heart;
 import com.example.instagramapp.Utils.SquareImageView;
 import com.example.instagramapp.Utils.UniversalImageLoader;
-import com.example.instagramapp.models.Likes;
-import com.example.instagramapp.models.Photo;
-import com.example.instagramapp.models.Users;
+import com.example.instagramapp.modelFirebase.Likes;
+import com.example.instagramapp.modelFirebase.Photo;
+import com.example.instagramapp.modelFirebase.Users;
 
 public class ViewPostFragment extends Fragment {
 

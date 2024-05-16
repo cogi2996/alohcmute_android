@@ -20,7 +20,7 @@ import java.util.List;
 
 import com.example.instagramapp.R;
 import com.example.instagramapp.Utils.SearchUsersAdapter;
-import com.example.instagramapp.models.Users;
+import com.example.instagramapp.modelFirebase.Users;
 
 public class FollowersFollowing extends AppCompatActivity {
 

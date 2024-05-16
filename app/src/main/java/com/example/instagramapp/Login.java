@@ -31,6 +31,7 @@ public class Login extends AppCompatActivity {
     String email;
     String password;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +64,6 @@ public class Login extends AppCompatActivity {
                     email = Email.getEditText().getText().toString().trim();
                     password = Pass.getEditText().getText().toString().trim();
                     if (isValid()) {
-
                         final ProgressDialog mDialog = new ProgressDialog(Login.this);
                         mDialog.setCanceledOnTouchOutside(false);
                         mDialog.setCancelable(false);
@@ -73,6 +73,7 @@ public class Login extends AppCompatActivity {
 
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
+
                                 if (task.isSuccessful()) {
 
                                     mDialog.dismiss();

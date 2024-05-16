@@ -33,9 +33,9 @@ import java.util.Map;
 
 import com.example.instagramapp.R;
 import com.example.instagramapp.Utils.CommentListAdapter;
-import com.example.instagramapp.models.Comments;
-import com.example.instagramapp.models.Photo;
-import com.example.instagramapp.models.Users;
+import com.example.instagramapp.modelFirebase.Comments;
+import com.example.instagramapp.modelFirebase.Photo;
+import com.example.instagramapp.modelFirebase.Users;
 
 
 public class ViewComments extends AppCompatActivity {
