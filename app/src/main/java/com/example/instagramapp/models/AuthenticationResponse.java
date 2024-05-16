@@ -1,4 +1,4 @@
-package com.example.instagramapp.modelFirebase;
+package com.example.instagramapp.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
-    private String email;
-    private String password;
+public class AuthenticationResponse {
+    private String accessToken;
 }

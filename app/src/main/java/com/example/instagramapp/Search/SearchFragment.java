@@ -28,7 +28,7 @@ import java.util.List;
 
 import com.example.instagramapp.R;
 import com.example.instagramapp.Utils.SearchUsersAdapter;
-import com.example.instagramapp.modelFirebase.Users;
+import com.example.instagramapp.models.Users;
 
 public class SearchFragment extends Fragment {
 

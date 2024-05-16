@@ -25,7 +25,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import com.example.instagramapp.Messages.MessageActivity;
 import com.example.instagramapp.Messages.Model.Chat;
 import com.example.instagramapp.R;
-import com.example.instagramapp.modelFirebase.Users;
+import com.example.instagramapp.models.Users;
 
 public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHolder> {
 

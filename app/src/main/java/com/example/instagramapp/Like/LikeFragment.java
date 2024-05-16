@@ -26,7 +26,7 @@ import java.util.List;
 
 import com.example.instagramapp.R;
 import com.example.instagramapp.Utils.LikeNotificationAdapter;
-import com.example.instagramapp.modelFirebase.Notification;
+import com.example.instagramapp.models.Notification;
 
 public class LikeFragment extends Fragment {
 

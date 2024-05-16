@@ -5,6 +5,9 @@ import com.example.instagramapp.models.Users;
 import com.example.instagramapp.modelFirebase.AuthenticationRequest;
 import com.example.instagramapp.modelFirebase.AuthenticationResponse;
 import com.example.instagramapp.modelFirebase.ResponseDTO;
+import com.example.instagramapp.models.AuthenticationRequest;
+import com.example.instagramapp.models.AuthenticationResponse;
+import com.example.instagramapp.models.ResponseDTO;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

@@ -30,8 +30,8 @@ import java.util.List;
 
 import com.example.instagramapp.Profile.FollowersFollowing;
 import com.example.instagramapp.R;
-import com.example.instagramapp.modelFirebase.Story;
-import com.example.instagramapp.modelFirebase.Users;
+import com.example.instagramapp.models.Story;
+import com.example.instagramapp.models.Users;
 
 public class StoryActivity extends AppCompatActivity {
 

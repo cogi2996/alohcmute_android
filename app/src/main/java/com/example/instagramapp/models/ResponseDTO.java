@@ -1,4 +1,4 @@
-package com.example.instagramapp.modelFirebase;
+package com.example.instagramapp.models;
 
 import com.google.gson.annotations.SerializedName;
 

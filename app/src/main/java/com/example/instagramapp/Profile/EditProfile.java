@@ -30,8 +30,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import com.example.instagramapp.R;
-import com.example.instagramapp.modelFirebase.Users;
-import com.example.instagramapp.modelFirebase.privatedetails;
+import com.example.instagramapp.models.Users;
+import com.example.instagramapp.models.privatedetails;
 
 import retrofit2.Call;
 import retrofit2.Callback;

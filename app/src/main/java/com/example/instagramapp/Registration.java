@@ -34,9 +34,9 @@ import com.hbb20.CountryCodePicker;
 import java.util.Calendar;
 
 import com.example.instagramapp.ReusableCode.ReusableCodeForAll;
-import com.example.instagramapp.modelFirebase.Passwords;
-import com.example.instagramapp.modelFirebase.Users;
-import com.example.instagramapp.modelFirebase.privatedetails;
+import com.example.instagramapp.models.Passwords;
+import com.example.instagramapp.models.Users;
+import com.example.instagramapp.models.privatedetails;
 
 public class Registration extends AppCompatActivity {
 
