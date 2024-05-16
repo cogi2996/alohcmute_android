@@ -32,18 +32,25 @@
 <!--            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"-->
 <!--            android:theme="@style/Base.Theme.AppCompat" />-->
         <activity android:name=".Login" />
-        <activity android:name=".Profile.EditProfile" />
-        <activity android:name=".Profile.Account_Settings" />
-        <activity
-            android:name=".Home"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".MainActivity"
+        <activity android:name=".Profile.EditProfile"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Profile.Account_Settings" />
+        <activity
+            android:name=".Home"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".MainActivity"
+            android:exported="false">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <service

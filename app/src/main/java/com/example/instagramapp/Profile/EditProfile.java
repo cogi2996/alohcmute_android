@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramapp.retrofit.APIService;
+import com.example.instagramapp.retrofit.RetrofitClient;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,76 +33,101 @@ import com.example.instagramapp.R;
 import com.example.instagramapp.models.Users;
 import com.example.instagramapp.models.privatedetails;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class EditProfile extends AppCompatActivity {
 
     ImageView mProfilePhoto;
-    TextInputEditText name,username,bio,website;
-    String Name,Username,Bio,Website,profile;
-    DatabaseReference databaseReference,data;
-    StorageReference storageReference,reff;
-    TextView Email,Phonenumber,Gender,Birth;
+    TextInputEditText name, username, bio, website;
+    String Name, Username, Bio, Website, profile;
+    DatabaseReference databaseReference, data;
+    StorageReference storageReference, reff;
+    TextView Email, Phonenumber, Gender, Birth;
     ImageView submit;
     String useridd;
-    int PICK_IMAGE_REQUEST=1;
+    int PICK_IMAGE_REQUEST = 1;
     Uri imageUri;
+
+    String urlEdit = "https://instagramapp-1.herokuapp.com/api/v1/users/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-        mProfilePhoto = (ImageView)findViewById(R.id.user_img);
+        mProfilePhoto = (ImageView) findViewById(R.id.user_img);
         name = (TextInputEditText) findViewById(R.id.Namee);
-        username = (TextInputEditText)findViewById(R.id.Usernamee);
-        bio = (TextInputEditText)findViewById(R.id.Bioo);
-        website = (TextInputEditText)findViewById(R.id.Websitee);
-        submit = (ImageView)findViewById(R.id.rightt);
-        Email = (TextView)findViewById(R.id.email);
-        Phonenumber = (TextView)findViewById(R.id.phonenumber);
-        Gender = (TextView)findViewById(R.id.gender);
-        Birth = (TextView)findViewById(R.id.birth);
+        username = (TextInputEditText) findViewById(R.id.Usernamee);
+        bio = (TextInputEditText) findViewById(R.id.Bioo);
+        website = (TextInputEditText) findViewById(R.id.Websitee);
+        submit = (ImageView) findViewById(R.id.rightt);
+        Email = (TextView) findViewById(R.id.email);
+        Phonenumber = (TextView) findViewById(R.id.phonenumber);
+        Gender = (TextView) findViewById(R.id.gender);
+        Birth = (TextView) findViewById(R.id.birth);
 
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
+        Users updatedUser = new Users();
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(name.getText().toString())) {
+
+                    // displaying a toast message if the edit text is empty.
+                    Toast.makeText(EditProfile.this, "Please enter your data..", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // calling a method to update data in our API.
+                callPutUpdateProfile(updatedUser);
+            }
+        });
+
 
 //******************************RETRIEVING DATA***************************
-        final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                final Users user = snapshot.getValue(Users.class);
-                name.setText(user.getFullName());
-                username.setText(user.getUsername());
-                bio.setText(user.getDiscription());
-                website.setText(user.getWebsite());
-                Glide.with(EditProfile.this)
-                        .load(user.getProfilePhoto())
-                        .into(mProfilePhoto);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        FirebaseDatabase.getInstance().getReference("Privatedetails")
-                .child(userid).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                final privatedetails privatedetail = snapshot.getValue(privatedetails.class);
-                Email.setText(privatedetail.getEmail());
-                Phonenumber.setText(privatedetail.getPhoneNumber());
-                Gender.setText(privatedetail.getGender());
-                Birth.setText(privatedetail.getBirthdate());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+//        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                final Users user = snapshot.getValue(Users.class);
+//                name.setText(user.getFullName());
+//                username.setText(user.getUsername());
+//                bio.setText(user.getDiscription());
+//                website.setText(user.getWebsite());
+//                Glide.with(EditProfile.this)
+//                        .load(user.getProfilePhoto())
+//                        .into(mProfilePhoto);
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//        FirebaseDatabase.getInstance().getReference("Privatedetails")
+//                .child(userid).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                final privatedetails privatedetail = snapshot.getValue(privatedetails.class);
+//                Email.setText(privatedetail.getEmail());
+//                Phonenumber.setText(privatedetail.getPhoneNumber());
+//                Gender.setText(privatedetail.getGender());
+//                Birth.setText(privatedetail.getBirthdate());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
 //************************************************************************
 
 
@@ -115,7 +143,6 @@ public class EditProfile extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
                 Name = name.getText().toString().trim();
                 Username = username.getText().toString().trim();
                 Bio = bio.getText().toString().trim();
@@ -125,14 +152,15 @@ public class EditProfile extends AppCompatActivity {
                 ref.child("Users").orderByChild("Username").equalTo(Username).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
+                        if (snapshot.exists()) {
                             Toast.makeText(EditProfile.this, "Username already exists. Please try other username.", Toast.LENGTH_SHORT).show();
-                        }else{
+                        } else {
                             useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             data = FirebaseDatabase.getInstance().getReference("Users").child(useridd);
                             data.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) { final ProgressDialog mDialog = new ProgressDialog(EditProfile.this);
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    final ProgressDialog mDialog = new ProgressDialog(EditProfile.this);
                                     mDialog.setCancelable(false);
                                     mDialog.setCanceledOnTouchOutside(false);
                                     mDialog.setMessage("Updating please wait...");
@@ -144,7 +172,7 @@ public class EditProfile extends AppCompatActivity {
                                     // Set profile photo
                                     if (imageUri != null) {
 
-                                        reff = storageReference.child("photos/users/"+"/"+useridd+"/profilephoto");
+                                        reff = storageReference.child("photos/users/" + "/" + useridd + "/profilephoto");
                                         reff.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 
                                             @Override
@@ -166,7 +194,7 @@ public class EditProfile extends AppCompatActivity {
 
                                     mDialog.dismiss();
                                     Toast.makeText(EditProfile.this, "Profile Updated Successfully!", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(EditProfile.this,Account_Settings.class));
+                                    startActivity(new Intent(EditProfile.this, Account_Settings.class));
                                     finish();
 
                                 }
@@ -191,18 +219,52 @@ public class EditProfile extends AppCompatActivity {
         });
 
     }
+
+    private void callPutUpdateProfile(Users users) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(urlEdit)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        APIService apiService = retrofit.create(APIService.class);
+
+        Call<Users> callEditProfile = apiService.getEditProfile(users);
+
+        callEditProfile.enqueue(new Callback<Users>() {
+            @Override
+            public void onResponse(Call<Users> call, Response<Users> response) {
+                Toast.makeText(EditProfile.this, "Profile Update", Toast.LENGTH_SHORT);
+
+                submit.setVisibility(View.GONE);
+
+                name.setText(users.getFullName());
+                username.setText(users.getUsername());
+                bio.setText(users.getDiscription());
+                website.setText(users.getWebsite());
+                Glide.with(EditProfile.this)
+                        .load(users.getProfilePhoto());
+            }
+
+            @Override
+            public void onFailure(Call<Users> call, Throwable throwable) {
+                Toast.makeText(EditProfile.this, "Error", Toast.LENGTH_SHORT);
+            }
+        });
+
+    }
+
     private void openFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,PICK_IMAGE_REQUEST);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null){
+                && data != null && data.getData() != null) {
             imageUri = data.getData();
             mProfilePhoto.setImageURI(imageUri);
 
@@ -210,7 +272,6 @@ public class EditProfile extends AppCompatActivity {
 
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
 
 //        https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vexels.com%2Fpng-svg%2Fpreview%2F147102%2Finstagram-profile-icon&psig=AOvVaw0Liq2WBgqkhzMz_UQkcP5T&ust=1600009441788000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIiNu-nx4-sCFQAAAAAdAAAAABAD
