@@ -85,37 +85,37 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Fauth = FirebaseAuth.getInstance();
-                if (Fauth.getCurrentUser() != null) {
-                    if (Fauth.getCurrentUser().isEmailVerified()) {
-                        Intent n = new Intent(MainActivity.this, Home.class);
-                        startActivity(n);
-                        finish();
-                    } else {
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                        builder.setMessage("Check whether you have verified your Email, Otherwise please verify");
-                        builder.setCancelable(false);
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                dialog.dismiss();
-                                Intent intent = new Intent(MainActivity.this, Login.class);
-                                startActivity(intent);
-                                finish();
-
-                            }
-                        });
-                        AlertDialog alert = builder.create();
-                        alert.show();
-                        Fauth.signOut();
-                    }
-                } else {
+//                if (Fauth.getCurrentUser() != null) {
+//                    if (Fauth.getCurrentUser().isEmailVerified()) {
+//                        Intent n = new Intent(MainActivity.this, Home.class);
+//                        startActivity(n);
+//                        finish();
+//                    } else {
+//
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//                        builder.setMessage("Check whether you have verified your Email, Otherwise please verify");
+//                        builder.setCancelable(false);
+//                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                                dialog.dismiss();
+//                                Intent intent = new Intent(MainActivity.this, Login.class);
+//                                startActivity(intent);
+//                                finish();
+//
+//                            }
+//                        });
+//                        AlertDialog alert = builder.create();
+//                        alert.show();
+//                        Fauth.signOut();
+//                    }
+//                } else {
                     Intent intent = new Intent(MainActivity.this, Login.class);
                     startActivity(intent);
                     finish();
 
-                }
+//                }
 
             }
         },3000);
