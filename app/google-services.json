@@ -1,14 +1,14 @@
 {
   "project_info": {
-    "project_number": "789927769464",
-    "firebase_url": "https://instagramapp-c6ecd-default-rtdb.firebaseio.com",
-    "project_id": "instagramapp-c6ecd",
-    "storage_bucket": "instagramapp-c6ecd.appspot.com"
+    "project_number": "1016166670509",
+    "firebase_url": "https://instagram-50c5a-default-rtdb.firebaseio.com",
+    "project_id": "instagram-50c5a",
+    "storage_bucket": "instagram-50c5a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:789927769464:android:23d8976ce451d6d579448d",
+        "mobilesdk_app_id": "1:1016166670509:android:96f2a660bad0f7cd37e624",
         "android_client_info": {
           "package_name": "com.example.instagramapp"
         }
@@ -16,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDfX-QgZ2A4Jf50lNkR4bfExc5yNf68AIc"
+          "current_key": "AIzaSyA17SSWaxUC-YOjIFuYfDAUGcJDfr_I3Z8"
         }
       ],
       "services": {
