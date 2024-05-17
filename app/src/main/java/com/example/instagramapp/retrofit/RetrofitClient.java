@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static Retrofit retrofit;
 
-    public static Retrofit getRetrofit() {
+    public static Retrofit getRetrofitAuth() {
         if (retrofit == null) {
             OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
 
@@ -23,4 +23,14 @@ public class RetrofitClient {
         }
         return retrofit;
     }
+    public static Retrofit getRetrofit() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl("http://192.168.56.1:8080/api/v1/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
+
 }

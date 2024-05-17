@@ -29,8 +29,8 @@ public class Account_Settings extends AppCompatActivity {
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Account_Settings.this,EditProfile.class);
-                startActivity(intent);
+//                Intent intent = new Intent(Account_Settings.this,EditProfile.class);
+//                startActivity(intent);
             }
         });
 

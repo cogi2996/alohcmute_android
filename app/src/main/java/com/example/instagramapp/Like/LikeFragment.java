@@ -49,54 +49,12 @@ public class LikeFragment extends Fragment {
         notificationList = new ArrayList<>();
         likeNotificationAdapter = new LikeNotificationAdapter(getContext(),notificationList);
         recyclerView.setAdapter(likeNotificationAdapter);
-        
-        readNotifications();
-
         return v;
     }
 
-    private void readNotifications() {
-
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications")
-                .child(firebaseUser.getUid());
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                notificationList.clear();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Notification notification = dataSnapshot.getValue(Notification.class);
-                    notificationList.add(notification);
-                }
-                Collections.reverse(notificationList);
-                likeNotificationAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
 
-    public void onResume() {
 
-        super.onResume();
-        this.getView().setFocusableInTouchMode(true);
-        this.getView().requestFocus();
-        this.getView().setOnKeyListener(new View.OnKeyListener() {
 
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
 
 }

@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import com.example.instagramapp.Profile.ViewComments;
+//import com.example.instagramapp.Profile.ViewComments;
 import com.example.instagramapp.R;
 import com.example.instagramapp.models.Comments;
 import com.example.instagramapp.models.Likes;
@@ -134,15 +134,15 @@ public class HomeFragmentPostViewListAdapter extends ArrayAdapter<Photo> {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: loading comment thread for " + getItem(position).getPhoto_id());
-                Intent b = new Intent(mContext, ViewComments.class);
+//                Intent b = new Intent(mContext, ViewComments.class);
                 //Create the bundle
                 Bundle bundle = new Bundle();
                 //Add your data from getFactualResults method to bundle
                 bundle.putParcelable("Photo", getItem(position));
-                b.putExtra("commentcount",comments.size());
-                //Add the bundle to the intent
-                b.putExtras(bundle);
-                mContext.startActivity(b);
+////                b.putExtra("commentcount",comments.size());
+////                //Add the bundle to the intent
+////                b.putExtras(bundle);
+//                mContext.startActivity(b);
 
             }
         });
@@ -213,15 +213,15 @@ public class HomeFragmentPostViewListAdapter extends ArrayAdapter<Photo> {
                     holder.comment.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent b = new Intent(mContext, ViewComments.class);
-                            //Create the bundle
-                            Bundle bundle = new Bundle();
-                            //Add your data from getFactualResults method to bundle
-                            bundle.putParcelable("Photo", getItem(position));
-                            b.putExtra("commentcount",comments.size());
-                            //Add the bundle to the intent
-                            b.putExtras(bundle);
-                            mContext.startActivity(b);
+//                            Intent b = new Intent(mContext, ViewComments.class);
+//                            //Create the bundle
+//                            Bundle bundle = new Bundle();
+//                            //Add your data from getFactualResults method to bundle
+//                            bundle.putParcelable("Photo", getItem(position));
+//                            b.putExtra("commentcount",comments.size());
+//                            //Add the bundle to the intent
+//                            b.putExtras(bundle);
+//                            mContext.startActivity(b);
                         }
                     });
                 }

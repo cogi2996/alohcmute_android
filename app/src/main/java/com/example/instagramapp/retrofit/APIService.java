@@ -1,12 +1,9 @@
 package com.example.instagramapp.retrofit;
 
+import com.example.instagramapp.ModelAPI.AuthenticationRequest;
+import com.example.instagramapp.ModelAPI.AuthenticationResponse;
 import com.example.instagramapp.models.ResponseDTO;
 import com.example.instagramapp.models.Users;
-import com.example.instagramapp.modelFirebase.AuthenticationRequest;
-import com.example.instagramapp.modelFirebase.AuthenticationResponse;
-import com.example.instagramapp.modelFirebase.ResponseDTO;
-import com.example.instagramapp.models.AuthenticationRequest;
-import com.example.instagramapp.models.AuthenticationResponse;
 import com.example.instagramapp.models.ResponseDTO;
 
 import retrofit2.Call;
@@ -29,6 +26,7 @@ public interface APIService {
     // Đăng nhập
     @POST("auth/login")
     Call<AuthenticationResponse> login(@Body AuthenticationRequest request);
+
 
 
 

@@ -57,7 +57,6 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-
         alreadyhaveacc = (TextView)findViewById(R.id.AlreadyHavesignin);
         Birth = (EditText)findViewById(R.id.birthdate);
         Fname = (TextInputLayout) findViewById(R.id.Fullname);
@@ -68,14 +67,11 @@ public class Registration extends AppCompatActivity {
         Mobileno = (TextInputLayout) findViewById(R.id.mobilenoo);
         Description = (TextInputLayout) findViewById(R.id.bio);
         Website = (TextInputLayout) findViewById(R.id.website);
-
         Cpp = (CountryCodePicker) findViewById(R.id.countrycode);
-
         register = (Button) findViewById(R.id.signup_button);
 
 //******************************BACKGROUND ANIMATION*************************
         RelativeLayout container = (RelativeLayout) findViewById(R.id.relative_registration);
-
         anim = (AnimationDrawable) container.getBackground();
         anim.setEnterFadeDuration(6000);
         anim.setExitFadeDuration(2000);
@@ -98,7 +94,6 @@ public class Registration extends AppCompatActivity {
                     }
                 },year,month,day);
                 datePickerDialog.show();
-
             }
         });
 
@@ -111,7 +106,6 @@ public class Registration extends AppCompatActivity {
             }
         });
 
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
         FAuth = FirebaseAuth.getInstance();
@@ -121,7 +115,6 @@ public class Registration extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 fname = Fname.getEditText().getText().toString().trim();
                 username = Username.getEditText().getText().toString().trim();
                 email = Email.getEditText().getText().toString().trim();
@@ -133,13 +126,11 @@ public class Registration extends AppCompatActivity {
                 website = Website.getEditText().getText().toString().trim();
 
                 if (isValid()) {
-
                     databaseReference.child("Users").orderByChild("Username").equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()){
                                 Toast.makeText(Registration.this, "Username already exists. Please try other username.", Toast.LENGTH_SHORT).show();
-
 
                             }else {
                                 final ProgressDialog mDialog = new ProgressDialog(Registration.this);
