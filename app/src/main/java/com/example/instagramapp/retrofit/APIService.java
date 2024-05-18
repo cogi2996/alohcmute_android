@@ -4,6 +4,10 @@ import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
+import com.example.instagramapp.ModelAPI.User;
+import com.example.instagramapp.ModelAPI.UserResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -23,6 +27,25 @@ public interface APIService {
     // Đăng nhập
     @POST("auth/login")
     Call<AuthenticationResponse> login(@Body AuthenticationRequest request);
+
+
+
+
+    //tin
+    @GET("users/search")
+    Call<UserResponse> searchUserByName(
+            @Query("name") String name,
+            @Query("pageNum") int pageNum,
+            @Query("pageSize") int pageSize
+    );
+
+    @GET("users")
+    Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
+                                  @Query("pageSize") int pageSize);
+
+
+
+
 
     // like
     @POST("users/{userId}/likeList/posts/{postId}")

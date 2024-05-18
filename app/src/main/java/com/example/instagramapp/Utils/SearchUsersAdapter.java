@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramapp.ModelAPI.User;
+import com.example.instagramapp.Profile.FollowersFollowing;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -26,6 +28,7 @@ public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.
 
     private Context mcontext;
     private List<Users> muser;
+    private List<User> muser1;
     String TAG = "SearchUserAdapter";
 //    private LayoutInflater inflater;
 
@@ -35,6 +38,10 @@ public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.
     public SearchUsersAdapter(Context mcontext, List<Users> muser) {
         this.mcontext = mcontext;
         this.muser = muser;
+    }
+
+    public SearchUsersAdapter(List<User> muser1) {
+        this.muser1 = muser1;
     }
 
     @NonNull
