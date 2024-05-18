@@ -47,7 +47,7 @@ public class SearchFragment extends Fragment {
     EditText search;
 
     APIService apiService;
-
+    private UserResponse userResponse;
 
 
     @Nullable
@@ -59,21 +59,40 @@ public class SearchFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         search = (EditText)v.findViewById(R.id.search_user);
+        loadUser(0,20);
 
-        Log.d(TAG,"Loi o day1 ");
-        loadUser();
+        search.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 0) {
+                    searchUsersByName(s.toString(), 0, 20);
+                    Log.d(TAG, s.toString());
+                } else {
+                    loadUser(0,20);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
         return v;
     }
+
 
     private void AnhXa() {
     }
 
-    private void loadUser() {
+    private void loadUser(int pageNum, int pageSize) {
         mUser = new ArrayList<>();
         apiService = RetrofitClient.getRetrofit().create(APIService.class);
 
-        Log.d(TAG,"Loi o day3");
-        apiService.getAllUsers().enqueue(new Callback<List<User>>() {
+        apiService.getAllUsers(pageNum,pageSize).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
 
@@ -100,31 +119,43 @@ public class SearchFragment extends Fragment {
                     // handle request errors depending on status code
                     Log.d(TAG, "Loi o day5");
                 }
-
-
-                //Log.d(TAG,"Loi o day4");
-                /*
-                List<User> tmp= response.body();
-                mUser.addAll(tmp);
-
-                Log.d("Size",String.valueOf(mUser));
-
-                searchUserAdapter = new SearchUserAdapter(mUser);
-                recyclerView.setAdapter(searchUserAdapter);
-                SearchUserAdapter searchUserAdapter = new SearchUserAdapter(mUser);
-                recyclerView.setAdapter(searchUserAdapter);*/
-
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable throwable) {
                 Log.d("LogFail", throwable.getMessage());
-                Log.d(TAG,"Loi o day2 ");
+
             }
         });
 
 
     }
 
+    private void searchUsersByName(String name, int pageNum, int pageSize) {
+        Log.d(TAG, "Loi o day12");
+        mUser = new ArrayList<>();
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.searchUserByName(name, pageNum, pageSize).enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "Loi o day13");
+                    mUser.clear();
+                    userResponse = response.body();
+                    mUser = userResponse.getListUser();
+                    searchUserAdapter = new SearchUserAdapter(mUser, getContext());
+                    recyclerView.setAdapter(searchUserAdapter);
+                    Log.d(TAG, "Loi o day14");
 
+                } else {
+                    // Handle error
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                Log.d("LogFail", t.getMessage());
+            }
+        });
+    }
 }

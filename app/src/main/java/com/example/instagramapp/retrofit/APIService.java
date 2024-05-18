@@ -37,7 +37,8 @@ public interface APIService {
     );
 
     @GET("users")
-    Call<List<User>> getAllUsers();
+    Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
+                                  @Query("pageSize") int pageSize);
 
 
 
