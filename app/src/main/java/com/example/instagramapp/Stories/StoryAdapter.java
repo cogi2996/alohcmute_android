@@ -20,12 +20,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.example.instagramapp.models.Users;
 
 import java.util.List;
 
 import com.example.instagramapp.R;
 import com.example.instagramapp.models.Story;
-import com.example.instagramapp.models.Users;
 
 public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
 

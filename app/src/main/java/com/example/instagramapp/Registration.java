@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.instagramapp.models.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -35,7 +36,6 @@ import java.util.Calendar;
 
 import com.example.instagramapp.ReusableCode.ReusableCodeForAll;
 import com.example.instagramapp.models.Passwords;
-import com.example.instagramapp.models.Users;
 import com.example.instagramapp.models.privatedetails;
 
 public class Registration extends AppCompatActivity {

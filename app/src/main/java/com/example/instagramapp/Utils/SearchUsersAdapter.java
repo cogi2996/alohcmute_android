@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramapp.models.Users;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -20,7 +21,6 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import com.example.instagramapp.R;
 import com.example.instagramapp.Search.UserSearchProfileActivity;
-import com.example.instagramapp.models.Users;
 
 public class SearchUsersAdapter extends RecyclerView.Adapter<SearchUsersAdapter.ViewHolder> {
 

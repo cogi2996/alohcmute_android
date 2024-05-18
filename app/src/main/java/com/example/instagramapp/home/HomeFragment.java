@@ -33,7 +33,7 @@ import java.util.Map;
 
 import com.example.instagramapp.R;
 import com.example.instagramapp.Stories.StoryAdapter;
-import com.example.instagramapp.Utils.HomeFragmentPostViewListAdapter;
+//import com.example.instagramapp.Utils.HomeFragmentPostViewListAdapter;
 import com.example.instagramapp.Utils.UniversalImageLoader;
 import com.example.instagramapp.models.Comments;
 import com.example.instagramapp.models.Photo;
@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<Photo> mPaginatedPhotos;
     private ArrayList<String> mFollowing;
     private ListView mListView;
-    private HomeFragmentPostViewListAdapter mAdapter;
+//    private HomeFragmentPostViewListAdapter mAdapter;
     private int mResults;
     ImageView message;
 

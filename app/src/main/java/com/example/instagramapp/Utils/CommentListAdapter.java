@@ -13,6 +13,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.instagramapp.models.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +31,6 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import com.example.instagramapp.R;
 import com.example.instagramapp.models.Comments;
-import com.example.instagramapp.models.Users;
 
 public class CommentListAdapter extends ArrayAdapter<Comments> {
 
