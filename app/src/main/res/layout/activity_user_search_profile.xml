@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="1dp">
 
 
                 <LinearLayout
@@ -95,7 +95,7 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="70dp"
+                        android:layout_height="75dp"
                         android:layout_weight="33"
                         android:orientation="vertical"
                         android:padding="5dp">
@@ -190,7 +190,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="29dp"
+                    android:layout_height="40dp"
                     android:orientation="horizontal"
                     android:weightSum="100">
 
@@ -207,7 +207,7 @@
                             android:text="Follow"
                             android:textAllCaps="false"
                             android:textColor="@color/white"
-                            android:textSize="16sp" />
+                            android:textSize="15sp" />
 
                         <Button
                             android:id="@+id/UserSearchProfile_Followingbtn"
@@ -216,8 +216,7 @@
                             android:background="@drawable/btn_shape_1"
                             android:text="Following"
                             android:textAllCaps="false"
-                            android:textSize="10sp"
-                            tools:ignore="SmallSp" />
+                            android:textSize="15sp" />
 
                     </RelativeLayout>
 
@@ -230,20 +229,11 @@
                         android:background="@drawable/btn_shape_1"
                         android:text="Message"
                         android:textAllCaps="false"
-                        android:textSize="10sp" />
+                        android:textSize="15sp"
+                        android:gravity="center"/>
 
 
                 </LinearLayout>
-
-                <!--                <Button-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="25dp"-->
-                <!--                    android:id="@+id/edit_profile"-->
-                <!--                    android:background="@drawable/btn_shape_1"-->
-                <!--                    android:text="Edit Profile"-->
-                <!--                    android:textAllCaps="false"-->
-                <!--                    android:textSize="18sp"-->
-                <!--                    android:layout_gravity="end"/>-->
 
             </LinearLayout>
 

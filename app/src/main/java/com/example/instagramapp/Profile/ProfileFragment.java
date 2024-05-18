@@ -1,6 +1,7 @@
 package com.example.instagramapp.Profile;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,10 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.instagramapp.ModelAPI.SingleUserResponse;
+import com.example.instagramapp.ModelAPI.UserResponse;
+import com.example.instagramapp.ModelAPI.Users;
+import com.example.instagramapp.retrofit.APIService;
+import com.example.instagramapp.retrofit.RetrofitClient;
 import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.ModelAPI.Users;
 import com.example.instagramapp.retrofit.APIService;
@@ -49,7 +54,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile,null);
         userId = (TextView) v.findViewById(R.id.userId);
-
+        userId.setText(String.valueOf(41));
         account_setting_menu = (ImageView) v.findViewById(R.id.account_settingMenu);
         editProfile = (Button)v.findViewById(R.id.edit_profile);
         profilePhoto = (ImageView)v.findViewById(R.id.user_img);
@@ -70,17 +75,17 @@ public class ProfileFragment extends Fragment {
     }
     private void getUserData(String userId) {
         APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        Call<SingleUserResponse> call = apiService.getUser(userId);
+        Call<UserResponse> call = apiService.getUser(userId);
 
-        call.enqueue(new Callback<SingleUserResponse>() {
+        call.enqueue(new Callback<UserResponse>() {
             @Override
-            public void onResponse(Call<SingleUserResponse> call, Response<SingleUserResponse> response) {
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 if (response.isSuccessful()) {
                     Users userResponse = response.body().getUser();
-                    // Now you can use the userResponse object to update your UI
                     if (response.body().getMessage().equals("success")) {
-                        String profileName = userResponse.getFirstName() + userResponse.getMidName() + userResponse.getLastName();
+                        String profileName = userResponse.getLastName() + userResponse.getMidName() + userResponse.getFirstName();
                         username.setText(profileName);
+                        name.setText(userResponse.getFirstName());
                         biography.setText(userResponse.getBiography());
                         department.setText(userResponse.getDepartment());
 
@@ -88,14 +93,11 @@ public class ProfileFragment extends Fragment {
                                 .load(userResponse.getAvatar())
                                 .into(profilePhoto);
                     }
-                } else {
-                    // Handle the error
-//                    Log.d("test", "here2");
                 }
             }
 
             @Override
-            public void onFailure(Call<SingleUserResponse> call, Throwable t) {
+            public void onFailure(Call<UserResponse> call, Throwable t) {
                 // Handle the error
 //                Log.d("test", "here3");
 //                Toast.makeText(ProfileFragment.this, "Error", Toast.LENGTH_SHORT);

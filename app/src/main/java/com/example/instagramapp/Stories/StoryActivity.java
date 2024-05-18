@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramapp.models.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +32,6 @@ import java.util.List;
 import com.example.instagramapp.Profile.FollowersFollowing;
 import com.example.instagramapp.R;
 import com.example.instagramapp.models.Story;
-import com.example.instagramapp.models.Users;
 
 public class StoryActivity extends AppCompatActivity {
 

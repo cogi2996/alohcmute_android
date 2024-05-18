@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramapp.models.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +24,6 @@ import java.util.List;
 
 import com.example.instagramapp.R;
 import com.example.instagramapp.models.Notification;
-import com.example.instagramapp.models.Users;
 
 public class LikeNotificationAdapter extends RecyclerView.Adapter<LikeNotificationAdapter.ViewHolder>{
 
