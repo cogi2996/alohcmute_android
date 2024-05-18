@@ -10,8 +10,10 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIService {
@@ -44,5 +46,11 @@ public interface APIService {
 
 
 
+    // like
+    @POST("users/{userId}/likeList/posts/{postId}")
+    Call<LikePostResponse> likePost(@Path("userId") int userId, @Path("postId") int postId);
+    // unlike post
+    @DELETE("users/{userId}/likeList/posts/{postId}")
+    Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
 
 }

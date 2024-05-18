@@ -1,10 +1,7 @@
 package com.example.instagramapp.ModelAPI;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,39 +10,26 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class User implements Serializable {
-    @SerializedName("userId")
     private int userId;
-    @SerializedName("phone")
     private String phone;
-    @SerializedName("createDate")
     private Date createDate;
-    @SerializedName("lastLogin")
     private Date lastLogin;
-    @SerializedName("firstName")
     private String firstName;
-    @SerializedName("midName")
     private String midName;
-
-    @SerializedName("lastName")
     private String lastName;
-    @SerializedName("address")
     private String address;
-    @SerializedName("biography")
     private String biography;
-
-    @SerializedName("major")
     private String major;
-    @SerializedName("department")
     private String department;
-    @SerializedName("gender")
-    private int gender;
-    @SerializedName("avatar")
+    private String text;
     private String avatar;
-    @SerializedName("dob")
+    private int gender;
     private Date dob;
 
-
+    public String getFullName(){
+        return getLastName()+" "+getMidName()+" "+ getFirstName();
+    }
 }

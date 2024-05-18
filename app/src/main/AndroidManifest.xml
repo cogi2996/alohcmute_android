@@ -24,9 +24,9 @@
         <activity android:name=".Login" />
         <activity android:name=".Profile.Account_Settings" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Home"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".Home"
+        <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
