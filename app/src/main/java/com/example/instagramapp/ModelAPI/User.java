@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO implements Serializable {
+public class User implements Serializable {
     private int userId;
     private String phone;
     private Date createDate;
@@ -28,6 +28,7 @@ public class UserDTO implements Serializable {
     private String avatar;
     private int gender;
     private Date dob;
+
     public String getFullName(){
         return getLastName()+" "+getMidName()+" "+ getFirstName();
     }
