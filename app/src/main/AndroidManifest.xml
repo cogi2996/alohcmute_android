@@ -21,12 +21,12 @@
         <activity android:name=".Post.PostActivity" />
         <activity android:name=".VerifyPhone" />
         <activity android:name=".Registration" />
-        <activity android:name=".Login" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Profile.Account_Settings" />
         <activity
-            android:name=".Home"
+            android:name=".Login"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".MainActivity"
+        <activity android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

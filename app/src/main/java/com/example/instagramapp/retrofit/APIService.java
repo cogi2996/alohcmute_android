@@ -2,9 +2,10 @@ package com.example.instagramapp.retrofit;
 
 import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
+import com.example.instagramapp.ModelAPI.LikePostResponse;
+import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.ModelAPI.UserResponse;
-import com.example.instagramapp.models.ResponseDTO;
 
 import java.util.List;
 
