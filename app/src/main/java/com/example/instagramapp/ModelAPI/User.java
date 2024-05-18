@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class User implements Serializable {
     @SerializedName("createDate")
     private Date createDate;
     @SerializedName("lastLogin")
-    private String lastLogin;
+    private Date lastLogin;
     @SerializedName("firstName")
     private String firstName;
     @SerializedName("midName")
@@ -46,6 +47,5 @@ public class User implements Serializable {
     @SerializedName("dob")
     private Date dob;
 
-    @SerializedName("isFollowed")
-    private int isFollowed;
+
 }

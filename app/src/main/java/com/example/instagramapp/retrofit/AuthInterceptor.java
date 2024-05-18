@@ -9,7 +9,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class AuthInterceptor implements Interceptor {
-    private String token = "eyJhbGciOiJIUzI1NiJ9.eyJmdWxsTmFtZSI6Ik5ndXnhu4VuIFF14buRYyBUdeG6pW4iLCJ1c2VySWQiOjQyLCJzdWIiOiJiaWRhbmcudHV5bG9hbkBnbWFpbC5jb20iLCJpYXQiOjE3MTU4NzkyMjEsImV4cCI6MTcxNTk2NTYyMX0.OAzDNh71VYf6st6fwG_7FAiVc7JEvxQUr-bm4DYnQp4";
+    private String token = "eyJhbGciOiJIUzI1NiJ9.eyJmdWxsTmFtZSI6Ik5ndXnhu4VuIFF14buRYyBUdeG6pW4iLCJ1c2VySWQiOjQxLCJzdWIiOiJiaWRhbmcudHV5bG9hbkBnbWFpbC5jb20iLCJpYXQiOjE3MTYwMjg0MzYsImV4cCI6MTcxNjExNDgzNn0.Ar5-Dn0bEqpO-JqrjuSCXSqYwCeu4HpiH74npN65jxE";
 
     @NonNull
     @Override

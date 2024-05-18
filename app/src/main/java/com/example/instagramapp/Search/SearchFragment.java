@@ -42,7 +42,7 @@ public class SearchFragment extends Fragment {
 
     private static final String TAG ="SearchFragment" ;
     private RecyclerView recyclerView;
-    private SearchUsersAdapter searchUsersAdapter;
+    private SearchUserAdapter searchUserAdapter;
     private List<User> mUser;
     EditText search;
 
@@ -59,7 +59,8 @@ public class SearchFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         search = (EditText)v.findViewById(R.id.search_user);
-        mUser = new ArrayList<>();
+
+        Log.d(TAG,"Loi o day1 ");
         loadUser();
         return v;
     }
@@ -68,18 +69,57 @@ public class SearchFragment extends Fragment {
     }
 
     private void loadUser() {
+        mUser = new ArrayList<>();
         apiService = RetrofitClient.getRetrofit().create(APIService.class);
+
+        Log.d(TAG,"Loi o day3");
         apiService.getAllUsers().enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                mUser = response.body();
-                //SearchUsersAdapter searchUsersAdapter = new SearchUsersAdapter(mUser);
-                //recyclerView.setAdapter(searchUsersAdapter);
+
+                Log.d("Notice", String.valueOf(response.code()));
+                Log.d("Notice", String.valueOf(response.errorBody()));
+
+                if (response.isSuccessful()) {
+                    List<User> tmp = response.body();
+                    if (tmp != null) {
+                        mUser.addAll(tmp);
+                        if (searchUserAdapter == null) {
+                            searchUserAdapter = new SearchUserAdapter(mUser,getContext());
+                            recyclerView.setAdapter(searchUserAdapter);
+                        } else {
+                            searchUserAdapter.notifyDataSetChanged();
+                        }
+                    } else {
+                        // Handle the case when response.body() is null
+                        Log.d(TAG, "Response body is null");
+                        // You can show an error message or do something else
+                    }
+                } else {
+                    int statusCode = response.code();
+                    // handle request errors depending on status code
+                    Log.d(TAG, "Loi o day5");
+                }
+
+
+                //Log.d(TAG,"Loi o day4");
+                /*
+                List<User> tmp= response.body();
+                mUser.addAll(tmp);
+
+                Log.d("Size",String.valueOf(mUser));
+
+                searchUserAdapter = new SearchUserAdapter(mUser);
+                recyclerView.setAdapter(searchUserAdapter);
+                SearchUserAdapter searchUserAdapter = new SearchUserAdapter(mUser);
+                recyclerView.setAdapter(searchUserAdapter);*/
+
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable throwable) {
                 Log.d("LogFail", throwable.getMessage());
+                Log.d(TAG,"Loi o day2 ");
             }
         });
 
