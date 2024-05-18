@@ -9,7 +9,11 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class AuthInterceptor implements Interceptor {
-    private String token = "eyJhbGciOiJIUzI1NiJ9.eyJmdWxsTmFtZSI6Ik5ndXnhu4VuIFF14buRYyBUdeG6pW4iLCJ1c2VySWQiOjQyLCJzdWIiOiJiaWRhbmcudHV5bG9hbkBnbWFpbC5jb20iLCJpYXQiOjE3MTU4NzkyMjEsImV4cCI6MTcxNTk2NTYyMX0.OAzDNh71VYf6st6fwG_7FAiVc7JEvxQUr-bm4DYnQp4";
+    private String token; // No longer final
+
+    public AuthInterceptor(String token) {
+        this.token = token;
+    }
 
     @NonNull
     @Override
@@ -21,4 +25,3 @@ public class AuthInterceptor implements Interceptor {
         return chain.proceed(newRequest);
     }
 }
-

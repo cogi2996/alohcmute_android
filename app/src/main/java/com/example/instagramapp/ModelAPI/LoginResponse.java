@@ -1,4 +1,9 @@
 package com.example.instagramapp.ModelAPI;
 
-public class LoginResponse {
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class LoginResponse implements Serializable {
+
 }
