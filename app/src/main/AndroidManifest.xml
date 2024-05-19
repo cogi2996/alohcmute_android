@@ -17,18 +17,23 @@
         android:theme="@style/Theme.InstagramApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".Profile.ResetPassword"
+            android:exported="false" />
         <activity android:name=".Stories.StoryActivity" />
         <activity android:name=".Stories.AddStoryActivity" />
         <activity android:name=".Profile.FollowersFollowing" />
         <activity android:name=".Search.UserSearchProfileActivity" />
         <activity android:name=".Post.PostActivity" />
-        <activity android:name=".Messenger.MessageActivity"
-            android:parentActivityName=".Messenger.ChatActivity"/>
+        <activity
+            android:name=".Messenger.MessageActivity"
+            android:parentActivityName=".Messenger.ChatActivity" />
         <activity
             android:name=".Messenger.ChatActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -45,10 +50,11 @@
         <activity
             android:name=".Home"
             android:exported="false">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <meta-data
