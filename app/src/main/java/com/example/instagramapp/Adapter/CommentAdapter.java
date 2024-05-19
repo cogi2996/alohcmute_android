@@ -32,7 +32,6 @@ import retrofit2.Response;
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     Context mContext;
     List<Comment> mComments;
-
     APIService apiService;
 
     public CommentAdapter(Context mContext, List<Comment> mComments) {

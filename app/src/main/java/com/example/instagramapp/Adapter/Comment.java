@@ -3,10 +3,7 @@ package com.example.instagramapp.Adapter;
 public class Comment {
     String publisherId;
     String text;
-
     String commentId;
-
-
 
     public Comment() {
 
