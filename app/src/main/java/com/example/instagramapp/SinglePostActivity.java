@@ -83,7 +83,7 @@ public class SinglePostActivity extends AppCompatActivity {
                     countLike.setVisibility(post.getCountLike() > 0 ? View.VISIBLE : View.GONE);
 
                     // Assuming getCommentCount() method exists in Post model
-                    txtCommentCount.setText(String.format("View all %d comments", post.getCountLike()));
+//                    txtCommentCount.setText(String.format("View all %d comments", post.getCountLike()));
                     txtCommentCount.setVisibility(post.getCountLike() > 0 ? View.VISIBLE : View.GONE);
 
                     // Format and set the post creation time
