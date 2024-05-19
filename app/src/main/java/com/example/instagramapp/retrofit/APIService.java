@@ -4,6 +4,7 @@ import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
+import com.example.instagramapp.ModelAPI.UserDTO;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -32,6 +33,6 @@ public interface APIService {
     Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
 
     @POST("users/current")
-    Call<ResponseDTO> getCurrentUser();
+    Call<UserDTO> getCurrentUser();
 
 }
