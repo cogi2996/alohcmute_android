@@ -17,7 +17,6 @@ import com.example.instagramapp.CommentsActivity;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
 import com.example.instagramapp.ModelAPI.Post;
 import com.example.instagramapp.R;
-import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.retrofit.APIService;
 import com.example.instagramapp.retrofit.RetrofitClient;
 
@@ -58,13 +57,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         String dateTime = simpleDateFormat.format(post.getPostCreateTime()).toString();
         holder.postCreateTime.setText(dateTime);
         holder.countLike.setText(String.valueOf(post.getCountLike()));
-        holder.txt_username.setText(post.getUserDTO().getFullName());
+        holder.txt_username.setText(post.getUser().getFullName());
 
 
         holder.update();
 //        holder.liked.setChecked(post.isLiked());
         Glide.with(context)
-                .load(post.getUserDTO().getAvatar()) // data picture
+                .load(post.getUser().getAvatar()) // data picture
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(holder.img_profile);
         Glide.with(context)

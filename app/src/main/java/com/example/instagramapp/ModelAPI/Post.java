@@ -14,6 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+//
 public class Post implements Serializable {
     @SerializedName("postId")
     private int postId;
@@ -28,7 +29,7 @@ public class Post implements Serializable {
     @SerializedName("liked")
     private boolean liked;
     @SerializedName("userDTO")
-    private UserDTO userDTO;
+    private User user;
 
 
 }
