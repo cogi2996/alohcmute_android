@@ -1,5 +1,6 @@
 package com.example.instagramapp.retrofit;
 
+import com.example.instagramapp.ModelAPI.Account;
 import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
 import com.example.instagramapp.ModelAPI.CurrentUserResponse;
@@ -72,6 +73,7 @@ public interface APIService {
     @GET("department/{id}/major")
     Call<MajorResponse> getMajorByDepartmentId(@Path("id") int id);
 
-
+    @POST("auth/register")
+    Call<AuthenticationResponse> register(@Body Account accountDTO);
 
 }

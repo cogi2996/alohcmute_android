@@ -40,7 +40,6 @@ public class HomeFragment extends Fragment {
     private int pageNum = 0; // pageNum variable to track page number
     private boolean isLoading = false; // flag to prevent multiple requests
     private static final int PAGE_SIZE = 2; // number of items to load per page
-
     private static final String TAG = "HomeFragment";
     ProgressBar progressBar;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -72,7 +71,6 @@ public class HomeFragment extends Fragment {
         rcPost.setAdapter(postAdapter);
         rcPost.setHasFixedSize(true);
         rcPost.setLayoutManager(new LinearLayoutManager(getContext()));
-
         rcPost.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
