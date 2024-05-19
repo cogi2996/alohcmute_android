@@ -12,7 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramapp.CommentsActivity;
+import com.example.instagramapp.ModelAPI.CurrentUserResponse;
+import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.R;
+import com.example.instagramapp.retrofit.APIService;
+import com.example.instagramapp.retrofit.RetrofitClient;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -20,13 +25,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     Context mContext;
     List<Comment> mComments;
 
+    APIService apiService;
+
     public CommentAdapter(Context mContext, List<Comment> mComments) {
         this.mContext = mContext;
         this.mComments = mComments;
+        apiService = RetrofitClient.getRetrofitAuth(mContext).create(APIService.class);
     }
 
     @NonNull
@@ -44,7 +56,25 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 //            User user = snapshot.toObject(User.class);
 //            Glide.with(mContext).load(user.getProfileImageUrl()).into(holder.profileImage);
 //            holder.username.setText(user.getUsername());
-            holder.username.setText("test");
+            Call<CurrentUserResponse> call = apiService.getUserById(Integer.parseInt(comment.getPublisherId()));
+            call.enqueue(new Callback<CurrentUserResponse>() {
+                @Override
+                public void onResponse(Call<CurrentUserResponse> call, Response<CurrentUserResponse> response) {
+                    if (response.isSuccessful()) {
+                        User user = response.body().getUser();
+                        holder.username.setText(user.getFullName());
+                        Glide.with(mContext)
+                                .load(user.getAvatar()) // data picture
+                                .placeholder(R.drawable.ic_launcher_background)
+                                .into(holder.profileImage);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CurrentUserResponse> call, Throwable t) {
+                    // Handle error
+                }
+            });
 //            holder.time.setText(DateTimeFormatter.getTimeDifference(comment.getCommentId(), true));
             holder.comment.setText(comment.getText());
 

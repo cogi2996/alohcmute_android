@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.instagramapp.Adapter.Comment;
 import com.example.instagramapp.Adapter.CommentAdapter;
+import com.example.instagramapp.ModelAPI.CurrentUserResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
+import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.retrofit.APIService;
 import com.example.instagramapp.retrofit.RetrofitClient;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CommentsActivity extends AppCompatActivity {
     RecyclerView recyclerViewComments;
@@ -55,25 +59,42 @@ public class CommentsActivity extends AppCompatActivity {
         String postId = getIntent().getExtras().getString("postId");
         commentsReference = FirebaseDatabase.getInstance().getReference().child("comments").child(postId);
         apiService = RetrofitClient.getRetrofitAuth(CommentsActivity.this).create(APIService.class);
-
-
         readComments();
-
         sendButton.setOnClickListener(v -> {
             String commentString = commentText.getText().toString();
             if (commentString.isEmpty()) return;
             DocumentReference userReference = FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getUid());
             // get infor current user public comment
-//            Call<LikePostResponse> call = apiService.getCurrentUser();
+            Call<CurrentUserResponse> call = apiService.getCurrentUser();
+            call.enqueue(new Callback<CurrentUserResponse>() {
+                @Override
+                public void onResponse(Call<CurrentUserResponse> call, Response<CurrentUserResponse> response) {
+                    if (response.isSuccessful()) {
+                        User user = response.body().getUser();
+                        String commentId = commentsReference.push().getKey(); // get a unique id for the comment
+                        Comment comment = new Comment(String.valueOf(user.getUserId()), commentString, commentId);
+                        commentText.clearFocus();
+                        commentText.setText("");
+                        commentsReference.child(commentId).setValue(comment).addOnSuccessListener(unused -> {
+                            // The comment will be added through ChildEventListener
+                        });
+                    }
+                }
 
-            String commentId = commentsReference.push().getKey(); // get a unique id for the comment
-            Comment comment = new Comment(userReference.getId(), commentString, commentId);
-
-            commentText.clearFocus();
-            commentText.setText("");
-            commentsReference.child(commentId).setValue(comment).addOnSuccessListener(unused -> {
-                // The comment will be added through ChildEventListener
+                @Override
+                public void onFailure(Call<CurrentUserResponse> call, Throwable t) {
+                    // Handle error
+                }
             });
+//
+//            String commentId = commentsReference.push().getKey(); // get a unique id for the comment
+//            Comment comment = new Comment(userReference.getId(), commentString, commentId);
+//
+//            commentText.clearFocus();
+//            commentText.setText("");
+//            commentsReference.child(commentId).setValue(comment).addOnSuccessListener(unused -> {
+//                // The comment will be added through ChildEventListener
+//            });
         });
 
         closeButton.setOnClickListener(view -> finish());

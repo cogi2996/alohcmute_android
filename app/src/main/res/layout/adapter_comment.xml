@@ -11,7 +11,7 @@
         android:layout_height="@dimen/profile_img_icon_size"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         app:civ_border_color="@color/app_name"
         app:civ_border_width=".1dp" />

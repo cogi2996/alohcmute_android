@@ -29,7 +29,7 @@ public class User implements Serializable {
     private int gender;
     private Date dob;
 
-    public String getFullName(){
-        return getLastName()+" "+getMidName()+" "+ getFirstName();
+    public String getFullName() {
+        return getLastName() + " " + getMidName() + " " + getFirstName();
     }
 }

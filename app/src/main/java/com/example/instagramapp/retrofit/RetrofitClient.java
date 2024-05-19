@@ -32,7 +32,6 @@ public class RetrofitClient {
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okHttpClient)
                     .build();
-
         return retrofit;
     }
 
@@ -45,11 +44,5 @@ public class RetrofitClient {
         }
         return retrofit;
     }
-
-
-
-
-
-
 
 }

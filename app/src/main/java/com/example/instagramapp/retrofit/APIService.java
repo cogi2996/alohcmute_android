@@ -2,7 +2,11 @@ package com.example.instagramapp.retrofit;
 
 import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
+import com.example.instagramapp.ModelAPI.CurrentUserResponse;
+import com.example.instagramapp.ModelAPI.Department;
+import com.example.instagramapp.ModelAPI.DepartmentResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
+import com.example.instagramapp.ModelAPI.MajorResponse;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.ModelAPI.UserResponse;
@@ -29,8 +33,6 @@ public interface APIService {
     Call<AuthenticationResponse> login(@Body AuthenticationRequest request);
 
 
-
-
     //tin
     @GET("users/search")
     Call<UserResponse> searchUserByName(
@@ -40,21 +42,36 @@ public interface APIService {
     );
 
     @GET("users")
-    Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
-                                  @Query("pageSize") int pageSize);
-
-
-
+    Call<List<User>> getAllUsers(@Query("pageNum") int pageNum,
+                                 @Query("pageSize") int pageSize);
 
 
     // like
     @POST("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> likePost(@Path("userId") int userId, @Path("postId") int postId);
+
     // unlike post
     @DELETE("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
 
     @POST("users/current")
-    Call<UserDTO> getCurrentUser();
+    Call<CurrentUserResponse> getCurrentUser();
+
+    //find user by id
+    @GET("users/{userId}")
+    Call<CurrentUserResponse> getUserById(@Path("userId") int userId);
+
+    // find all department
+    @GET("department")
+    Call<DepartmentResponse> getAllDepartment();
+
+    // find department by id
+    @GET("department/{id}")
+    Call<Department> getDepartmentById(@Path("id") int id);
+
+    @GET("department/{id}/major")
+    Call<MajorResponse> getMajorByDepartmentId(@Path("id") int id);
+
+
 
 }
