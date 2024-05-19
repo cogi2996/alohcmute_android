@@ -3,20 +3,19 @@ package com.example.instagramapp.ModelAPI;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse implements Serializable {
+public class LikePostResponse implements Serializable {
     @SerializedName("message")
     private String message;
     @SerializedName("data")
-    private List<User> listUser;
+    private int countLike;
 }

@@ -1,5 +1,6 @@
-package com.example.instagramapp.models;
+package com.example.instagramapp.ModelAPI;
 
+import com.example.instagramapp.ModelAPI.Post;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseDTO implements Serializable {
-    @SerializedName("success")
+    @SerializedName("message")
     private String message;
     @SerializedName("data")
     private List<Post> listPost;

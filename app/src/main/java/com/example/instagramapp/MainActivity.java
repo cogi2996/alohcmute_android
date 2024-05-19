@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -28,14 +29,12 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth Fauth;
     DatabaseReference databaseReference;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.d("runintologin", "1");
         if (isOnline()) {
-
             load();
         } else {
             try {
@@ -45,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
                         .setCancelable(false)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        load();
-                    }
-                }).show();
+                            public void onClick(DialogInterface dialog, int which) {
+                                load();
+                            }
+                        }).show();
             } catch (Exception e) {
                 Log.d(Constants.TAG, "Show Dialog: " + e.getMessage());
             }
@@ -59,17 +58,16 @@ public class MainActivity extends AppCompatActivity {
         ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = conMgr.getActiveNetworkInfo();
-
-        if(netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()){
+        if (netInfo == null || !netInfo.isConnected() || !netInfo.isAvailable()) {
             return false;
         }
         return true;
     }
 
-    public void load(){
-        insta_logo = (ImageView)findViewById(R.id.insta_logo);
-        androrealm = (TextView)findViewById(R.id.androrealm);
-        frm = (TextView)findViewById(R.id.from);
+    public void load() {
+        insta_logo = (ImageView) findViewById(R.id.insta_logo);
+        androrealm = (TextView) findViewById(R.id.androrealm);
+        frm = (TextView) findViewById(R.id.from);
 
         insta_logo.animate().alpha(0f).setDuration(0);
         androrealm.animate().alpha(0f).setDuration(0);
@@ -111,13 +109,27 @@ public class MainActivity extends AppCompatActivity {
 //                        Fauth.signOut();
 //                    }
 //                } else {
+                SharedPreferences sharedPreferences = MainActivity.this.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                String token = sharedPreferences.getString("access_token", "");
+                Log.d("TOKENLOGIN", token);
+
+                if (!token.equals("") ) {
+                    Intent intent = new Intent(MainActivity.this, Home.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Log.d("runintologin", "run: ");
                     Intent intent = new Intent(MainActivity.this, Login.class);
                     startActivity(intent);
                     finish();
+                }
 
 //                }
+                // neu ton tai token roi thi vo home
+
 
             }
-        },3000);
+        }, 3000);
     }
 }

@@ -2,6 +2,7 @@ package com.example.instagramapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -48,7 +49,6 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         createacc = (TextView) findViewById(R.id.signup);
-
         try {
             Email = (TextInputLayout) findViewById(R.id.login_email);
             Pass = (TextInputLayout) findViewById(R.id.login_password);
@@ -60,7 +60,6 @@ public class Login extends AppCompatActivity {
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     email = Email.getEditText().getText().toString().trim();
                     password = Pass.getEditText().getText().toString().trim();
                     if (isValid()) {
@@ -70,21 +69,17 @@ public class Login extends AppCompatActivity {
                         mDialog.setMessage("Logging in...");
                         mDialog.show();
                         FAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-
                                 if (task.isSuccessful()) {
                                     mDialog.dismiss();
                                     if (FAuth.getCurrentUser().isEmailVerified()) {
                                         mDialog.dismiss();
                                         Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
-//                                        signupInToServer();
-                                        Intent z = new Intent(Login.this, Home.class);
-                                        startActivity(z);
-                                        finish();
-
-
+                                        signupInToServer();
+//                                        Intent z = new Intent(Login.this, Home.class);
+//                                        startActivity(z);
+//                                        finish();
                                     } else {
                                         ReusableCodeForAll.ShowAlert(Login.this, "", "Please Verify your Email");
                                     }
@@ -147,7 +142,7 @@ public class Login extends AppCompatActivity {
     }
 
     public Boolean signupInToServer() {
-        apiService = RetrofitClient.getRetrofitAuth().create(APIService.class);
+        apiService = RetrofitClient.getRetrofit().create(APIService.class);
         AuthenticationRequest authenticationRequest = AuthenticationRequest.builder()
                 .email(email)
                 .password(password)
@@ -160,9 +155,15 @@ public class Login extends AppCompatActivity {
             public void onResponse(Call<AuthenticationResponse> call, Response<AuthenticationResponse> response) {
                 AuthenticationResponse authenticationResponse = response.body();
                 String access_token = authenticationResponse.getAccess_token();
-//                Intent z = new Intent(Login.this, Home.class);
-//                startActivity(z);
-//                finish();
+                // save token in shared preferences
+                SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                myEdit.putString("access_token", access_token);
+                myEdit.apply();
+                // save in shared preferences
+                Intent z = new Intent(Login.this, Home.class);
+                startActivity(z);
+                finish();
             }
 
             @Override
