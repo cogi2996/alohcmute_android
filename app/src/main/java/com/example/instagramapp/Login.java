@@ -159,6 +159,7 @@ public class Login extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
                 myEdit.putString("access_token", access_token);
+
                 myEdit.apply();
                 // save in shared preferences
                 Intent z = new Intent(Login.this, Home.class);

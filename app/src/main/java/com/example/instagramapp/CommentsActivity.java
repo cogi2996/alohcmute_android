@@ -11,17 +11,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.instagramapp.Adapter.Comment;
 import com.example.instagramapp.Adapter.CommentAdapter;
+import com.example.instagramapp.ModelAPI.LikePostResponse;
+import com.example.instagramapp.retrofit.APIService;
+import com.example.instagramapp.retrofit.RetrofitClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 public class CommentsActivity extends AppCompatActivity {
     RecyclerView recyclerViewComments;
@@ -29,8 +34,9 @@ public class CommentsActivity extends AppCompatActivity {
     ImageView sendButton, closeButton;
     CommentAdapter commentAdapter;
     List<Comment> comments;
+    private APIService apiService;
+
     DatabaseReference commentsReference;
-    private DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,53 +53,85 @@ public class CommentsActivity extends AppCompatActivity {
         recyclerViewComments.setHasFixedSize(true);
         recyclerViewComments.setAdapter(commentAdapter);
         String postId = getIntent().getExtras().getString("postId");
-//        String postId = getIntent().getExtras().getString("2","2");
         commentsReference = FirebaseDatabase.getInstance().getReference().child("comments").child(postId);
+        apiService = RetrofitClient.getRetrofitAuth(CommentsActivity.this).create(APIService.class);
+
 
         readComments();
-//        boolean openKeyboard = getIntent().getExtras().getBoolean("openKeyboard");// có chức năng mở bàn phím
-//        if (openKeyboard) {
-//            commentText.requestFocus();
-////            KeyboardManager.openKeyboard(this);
-//        }
 
         sendButton.setOnClickListener(v -> {
             String commentString = commentText.getText().toString();
             if (commentString.isEmpty()) return;
             DocumentReference userReference = FirebaseFirestore.getInstance().collection("Users").document(FirebaseAuth.getInstance().getUid());
-//            String commentId = DateTimeFormatter.getCurrentTime();
+            // get infor current user public comment
+//            Call<LikePostResponse> call = apiService.getCurrentUser();
+
             String commentId = commentsReference.push().getKey(); // get a unique id for the comment
             Comment comment = new Comment(userReference.getId(), commentString, commentId);
 
-//            KeyboardManager.closeKeyboard(this);
             commentText.clearFocus();
             commentText.setText("");
             commentsReference.child(commentId).setValue(comment).addOnSuccessListener(unused -> {
-                comments.add(comment);
-                commentAdapter.notifyDataSetChanged();
+                // The comment will be added through ChildEventListener
             });
         });
+
         closeButton.setOnClickListener(view -> finish());
     }
-
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         View focused = getCurrentFocus();
         if (focused != null) {
-//            KeyboardManager.closeKeyboard(this);
+            // Close keyboard if necessary
         }
         return super.dispatchTouchEvent(event);
     }
 
     private void readComments() {
-        commentsReference.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                comments.clear();
-                for (DataSnapshot commentSnapshot : task.getResult().getChildren()) {
-                    comments.add(commentSnapshot.getValue(Comment.class));
+        commentsReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
+                Comment comment = dataSnapshot.getValue(Comment.class);
+                comments.add(comment);
+                commentAdapter.notifyItemInserted(comments.size() - 1);
+                recyclerViewComments.scrollToPosition(comments.size() - 1);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
+                Comment updatedComment = dataSnapshot.getValue(Comment.class);
+                String commentId = updatedComment.getCommentId();
+
+                for (int i = 0; i < comments.size(); i++) {
+                    if (comments.get(i).getCommentId().equals(commentId)) {
+                        comments.set(i, updatedComment);
+                        commentAdapter.notifyItemChanged(i);
+                        break;
+                    }
                 }
-                commentAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                String commentId = dataSnapshot.getKey();
+                for (int i = 0; i < comments.size(); i++) {
+                    if (comments.get(i).getCommentId().equals(commentId)) {
+                        comments.remove(i);
+                        commentAdapter.notifyItemRemoved(i);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String previousChildName) {
+                // Handle if you care about the order of comments
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle possible errors
             }
         });
     }

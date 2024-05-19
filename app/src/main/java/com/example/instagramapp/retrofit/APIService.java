@@ -31,4 +31,7 @@ public interface APIService {
     @DELETE("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
 
+    @POST("users/current")
+    Call<ResponseDTO> getCurrentUser();
+
 }

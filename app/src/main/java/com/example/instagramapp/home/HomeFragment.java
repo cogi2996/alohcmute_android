@@ -7,12 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.instagramapp.Adapter.PostAdapter;
 import com.example.instagramapp.ModelAPI.Post;
@@ -40,6 +42,8 @@ public class HomeFragment extends Fragment {
     private static final int PAGE_SIZE = 2; // number of items to load per page
 
     private static final String TAG = "HomeFragment";
+    ProgressBar progressBar;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Nullable
     @Override
@@ -51,12 +55,15 @@ public class HomeFragment extends Fragment {
         Log.d(TAG, "Token: " + token);
         AnhXa(v);
         setupRecyclerView();
+        setupSwipeRefreshLayout();
         loadNewPost();
         return v;
     }
 
     private void AnhXa(View v) {
         rcPost = v.findViewById(R.id.recyclerview_posts);
+        progressBar = v.findViewById(R.id.load_progress);
+        swipeRefreshLayout = v.findViewById(R.id.swipe_refresh_layout);
     }
 
     private void setupRecyclerView() {
@@ -70,24 +77,41 @@ public class HomeFragment extends Fragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
                 LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (!isLoading && linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == listPost.size() - 1) {
-                    // Load more posts when scrolled to the bottom
-                    loadNewPost();
+                if (!isLoading && linearLayoutManager != null) {
+                    if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == listPost.size() - 1) {
+                        // Load more posts when scrolled to the bottom
+                        loadNewPost();
+                    }
                 }
             }
         });
     }
 
+    private void setupSwipeRefreshLayout() {
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            // Load posts again when pulled down
+            pageNum = 0;
+            listPost.clear();
+            postAdapter.notifyDataSetChanged();
+            loadNewPost();
+        });
+    }
+
     private void loadNewPost() {
+        Log.d("KKKKKK", "scrolltop " + pageNum);
+        if (pageNum == 0) {
+            progressBar.setVisibility(View.VISIBLE); // Show the progress bar
+        }
         isLoading = true; // Set loading flag
         apiService = RetrofitClient.getRetrofitAuth(getContext()).create(APIService.class);
         apiService.getNewPosts(pageNum, PAGE_SIZE).enqueue(new Callback<ResponseDTO>() {
             @Override
             public void onResponse(Call<ResponseDTO> call, @NonNull Response<ResponseDTO> response) {
-                Log.d("CALLXXX", ""+pageNum);
+                Log.d("CALLXXX", "" + pageNum);
                 isLoading = false; // Reset loading flag
+                progressBar.setVisibility(View.GONE); // Hide the progress bar
+                swipeRefreshLayout.setRefreshing(false); // Hide the swipe refresh indicator
                 if (response.body() == null) {
                     Log.d(TAG, "Response body is null");
                     return;
@@ -102,6 +126,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<ResponseDTO> call, Throwable t) {
                 isLoading = false; // Reset loading flag
+                progressBar.setVisibility(View.GONE); // Hide the progress bar
+                swipeRefreshLayout.setRefreshing(false); // Hide the swipe refresh indicator
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });

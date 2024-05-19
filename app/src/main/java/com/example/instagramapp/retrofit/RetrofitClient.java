@@ -35,6 +35,7 @@ public class RetrofitClient {
 
         return retrofit;
     }
+
     public static Retrofit getRetrofit() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
@@ -44,6 +45,8 @@ public class RetrofitClient {
         }
         return retrofit;
     }
+
+
 
 
 
