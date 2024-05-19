@@ -77,9 +77,9 @@ public class Login extends AppCompatActivity {
                                         mDialog.dismiss();
                                         Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
                                         signupInToServer();
-//                                        Intent z = new Intent(Login.this, Home.class);
-//                                        startActivity(z);
-//                                        finish();
+                                        Intent z = new Intent(Login.this, Home.class);
+                                        startActivity(z);
+                                        finish();
                                     } else {
                                         ReusableCodeForAll.ShowAlert(Login.this, "", "Please Verify your Email");
                                     }

@@ -8,9 +8,9 @@ import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.ModelAPI.UserResponse;
 
 import java.util.List;
+import com.example.instagramapp.ModelAPI.FollowResponse;
 import com.example.instagramapp.ModelAPI.UserResponse;
-import com.example.instagramapp.ModelAPI.Users;
-import com.example.instagramapp.models.ResponseDTO;
+import com.example.instagramapp.ModelAPI.UserResponse_findOne;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -47,11 +47,13 @@ public interface APIService {
     Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
                                   @Query("pageSize") int pageSize);
     @GET("users/{id}")
-    Call<UserResponse> getUser(@Path("id") String id);
+    Call<UserResponse_findOne> getUser(@Path("id") String id);
 
     @PATCH(value = "users")
-    Call<UserResponse> getEditProfile(@Body Users user);
+    Call<UserResponse> getEditProfile(@Body User user);
 
+    @GET("users/{id}/followers")
+    Call<FollowResponse> getFollowers(@Path("id") int id);
 
     // like
     @POST("users/{userId}/likeList/posts/{postId}")
