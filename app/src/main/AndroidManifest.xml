@@ -33,17 +33,10 @@
             android:exported="false" />
         <activity android:name=".Stories.StoryActivity" />
         <activity android:name=".Stories.AddStoryActivity" />
-        <activity android:name=".Profile.FollowersFollowing" />
+        <activity android:name=".Profile.Followers" />
         <activity android:name=".Search.UserSearchProfileActivity" />
         <activity android:name=".Post.PostActivity" />
-        <activity
-            android:name=".Messenger.MessageActivity"
-            android:parentActivityName=".Messenger.ChatActivity" />
-        <activity
-            android:name=".Messenger.ChatActivity"
-            android:exported="false" />
-        <activity android:name=".VerifyPhone" />
-        <activity android:name=".CommentsActivity" />
+<!--        <activity android:name=".VerifyPhone" />-->
         <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".Profile.Account_Settings" />
@@ -57,6 +50,7 @@
             android:windowSoftInputMode="adjustPan" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

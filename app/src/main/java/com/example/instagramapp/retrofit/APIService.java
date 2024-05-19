@@ -81,7 +81,6 @@ public interface APIService {
     // like
     @POST("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> likePost(@Path("userId") int userId, @Path("postId") int postId);
-
     // unlike post
     @DELETE("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
@@ -120,4 +119,11 @@ public interface APIService {
 
 
 
+
+    @GET("users/{id}/followers")
+    Call<FollowResponse> getFollowers(@Path("id") int id);
+    @GET("users/{id}/followings")
+    Call<FollowResponse> getFollowings(@Path("id") int id,
+            @Query("pageNum") int pageNum,
+            @Query("pageSize") int pageSize);
 }
