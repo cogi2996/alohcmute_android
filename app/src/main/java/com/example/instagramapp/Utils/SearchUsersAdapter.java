@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.instagramapp.ModelAPI.User;
-import com.example.instagramapp.Profile.FollowersFollowing;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

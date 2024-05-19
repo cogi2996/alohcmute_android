@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.instagramapp.Profile.FollowersFollowing;
+import com.example.instagramapp.Profile.Followers;
 import com.example.instagramapp.R;
 import com.example.instagramapp.models.Story;
 
@@ -118,7 +118,7 @@ public class StoryActivity extends AppCompatActivity {
         r_seen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(StoryActivity.this, FollowersFollowing.class);
+                Intent intent = new Intent(StoryActivity.this, Followers.class);
                 intent.putExtra("id", userid);
                 intent.putExtra("storyid", storyids.get(counter));
                 intent.putExtra("title", "Views");

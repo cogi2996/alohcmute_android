@@ -52,8 +52,7 @@ public interface APIService {
     @PATCH(value = "users")
     Call<UserResponse> getEditProfile(@Body User user);
 
-    @GET("users/{id}/followers")
-    Call<FollowResponse> getFollowers(@Path("id") int id);
+
 
     // like
     @POST("users/{userId}/likeList/posts/{postId}")
@@ -62,4 +61,11 @@ public interface APIService {
     @DELETE("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
 
+
+    @GET("users/{id}/followers")
+    Call<FollowResponse> getFollowers(@Path("id") int id);
+    @GET("users/{id}/followings")
+    Call<FollowResponse> getFollowings(@Path("id") int id,
+            @Query("pageNum") int pageNum,
+            @Query("pageSize") int pageSize);
 }
