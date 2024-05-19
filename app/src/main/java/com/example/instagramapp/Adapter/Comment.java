@@ -5,6 +5,7 @@ public class Comment {
     String text;
     String commentId;
 
+
     public Comment() {
 
     }
