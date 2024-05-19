@@ -42,12 +42,12 @@
 
             <ImageView
                 android:id="@+id/post_now"
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"
+                android:layout_width="29dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
                 android:padding="5dp"
                 android:src="@drawable/ic_check_right"
-                android:layout_marginEnd="10dp"
                 app:tint="@color/sky_blue" />
 
         </LinearLayout>
@@ -85,13 +85,13 @@
         android:background="@color/lightgray"
         android:layout_marginTop="4dp"
         android:layout_below="@id/linear1"/>
-    <EditText
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/added_tags"
-        android:hint="Tags"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"
+        android:id="@+id/btn_dang"
+        android:hint="Đăng"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
         android:layout_below="@+id/hr"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
