@@ -40,25 +40,20 @@ public class Followers extends AppCompatActivity {
             public void onResponse(Call<FollowResponse> call, Response<FollowResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     userList = response.body().getListFollow();
-                    followAdapter = new FollowAdapter(Followers.this, userList);
-                    recyclerView.setAdapter(followAdapter);
-                    if (response.isSuccessful()) {
-                        Toast.makeText(Followers.this, "loading", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Followers.this, UserSearchProfileActivity.class));
-                        finish();
+                    if (userList != null && userList.size() > 0) {
+                        followAdapter = new FollowAdapter(Followers.this, userList);
+                        recyclerView.setAdapter(followAdapter);
                     } else {
-                        // Handle the error
-
+                        Toast.makeText(Followers.this, "Không có người theo dõi", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(Followers.this, "Failed to load followers", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Followers.this, "Không có người theo dõi", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<FollowResponse> call, Throwable throwable) {
-                Toast.makeText(Followers.this, "An error occurred", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(Followers.this, "Không có người theo dõi", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -20,7 +20,7 @@
             android:name=".Profile.Followings"
             android:exported="false" />
         <activity
-            android:name=".Home"
+            android:name=".Login"
             android:exported="false" />
         <activity android:name=".Stories.StoryActivity" />
         <activity android:name=".Stories.AddStoryActivity" />
@@ -33,7 +33,7 @@
             android:name=".VerifyPhone"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Login"
+            android:name=".Home"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

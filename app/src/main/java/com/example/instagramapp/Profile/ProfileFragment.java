@@ -1,6 +1,8 @@
 package com.example.instagramapp.Profile;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +18,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramapp.ModelAPI.ImagePostDTO;
+import com.example.instagramapp.ModelAPI.Post;
+import com.example.instagramapp.ModelAPI.PostByIdResponse;
 import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.ModelAPI.UserResponse_findOne;
+import com.example.instagramapp.Search.SearchUserAdapter;
+import com.example.instagramapp.Utils.GridImageAdapter;
 import com.example.instagramapp.retrofit.APIService;
 import com.example.instagramapp.retrofit.RetrofitClient;
 import com.google.firebase.database.DatabaseReference;
 
 import com.example.instagramapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -46,13 +54,16 @@ public class ProfileFragment extends Fragment {
     DatabaseReference databaseReference;
     private ProgressBar mProgressBar;
     private List<User> mUser;
+    private List<Post> mPost;
+    private PostByIdResponse postByIdResponse;
+    ImageAdapter imageAdapter;
+    private List<ImagePostDTO> imagePostDTO;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, null);
         userId = (TextView) v.findViewById(R.id.userId);
-        userId.setText(String.valueOf(41));
         account_setting_menu = (ImageView) v.findViewById(R.id.account_settingMenu);
         editProfile = (Button) v.findViewById(R.id.edit_profile);
         profilePhoto = (ImageView) v.findViewById(R.id.user_img);
@@ -69,8 +80,97 @@ public class ProfileFragment extends Fragment {
         following = (LinearLayout) v.findViewById(R.id.FragmentProfile_followingLinearLayout);
         mProgressBar = (ProgressBar) v.findViewById(R.id.profileProgressBar);
         getUserData(userId.getText().toString());
+        loadImagePost(17, 0);
+
+        account_setting_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(getActivity(),Account_Settings.class);
+                startActivity(intent);
+            }
+        });
+//        editProfile.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(),EditProfile.class);
+//                startActivity(intent);
+//            }
+//        });
+
+        follower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getContext(),Followers.class);
+                startActivity(intent);
+
+            }
+        });
+
+        following.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),Followings.class);
+                startActivity(intent);
+
+            }
+        });
         return v;
     }
+
+    private void loadImagePost(int userId, int pageNum ) {
+        mProgressBar.setVisibility(View.VISIBLE);
+        mPost = new ArrayList<>();
+        APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
+        apiService.getUserPosts(userId, pageNum).enqueue(new Callback<PostByIdResponse>() {
+            @Override
+            public void onResponse(Call<PostByIdResponse> call, Response<PostByIdResponse> response) {
+
+                if (response.isSuccessful() && response.body() != null) {
+                    postByIdResponse = response.body();
+                    imagePostDTO = postByIdResponse.getListPost();
+
+                    // Tạo Adapter
+                    imageAdapter = new ImageAdapter(requireContext(),
+                            R.layout.layout_grid_imageview,
+                            imagePostDTO
+                    );
+
+                    gridView.setAdapter(imageAdapter);
+                    mProgressBar.setVisibility(View.GONE);
+                } else {
+                    // Nếu không tải được hình ảnh từ API, set hình ảnh cứng
+//                    imageAdapter = new ImageAdapter(requireContext(),
+//                            R.layout.layout_grid_imageview,
+//                            getDefaultImagePostDTO()
+//                    );
+//                    gridView.setAdapter(imageAdapter);
+//                    mProgressBar.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostByIdResponse> call, Throwable throwable) {
+                Log.d("LogFail", throwable.getMessage());
+
+                // Nếu không tải được hình ảnh từ API, set hình ảnh cứng
+//                imageAdapter = new ImageAdapter(requireContext(),
+//                        R.layout.layout_grid_imageview,
+//                        getDefaultImagePostDTO()
+//                );
+//                gridView.setAdapter(imageAdapter);
+//                mProgressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+//    private List<ImagePostDTO> getDefaultImagePostDTO() {
+//        List<ImagePostDTO> defaultImagePostDTO = new ArrayList<>();
+//        // Thiết lập dữ liệu hình ảnh cứng ở đây
+//        defaultImagePostDTO.add(new ImagePostDTO("", "Image 1"));
+//        defaultImagePostDTO.add(new ImagePostDTO("", "Image 2"));
+//        defaultImagePostDTO.add(new ImagePostDTO("", "Image 3"));
+//        return defaultImagePostDTO;
+//    }
 
     private void getUserData(String userId) {
         APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
