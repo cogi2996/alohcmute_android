@@ -39,33 +39,30 @@ public class Followings extends AppCompatActivity {
         recyclerView = findViewById(R.id.Following_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        apiService = RetrofitClient.getRetrofitAuth(Followings.this).create(APIService.class);
         apiService.getFollowings(15,0,20).enqueue(new Callback<FollowResponse>() {
 
 
             @Override
-        public void onResponse(Call<FollowResponse> call, Response<FollowResponse> response) {
-            if (response.isSuccessful() && response.body() != null) {
-                userList = response.body().getListFollow();
-                followAdapter = new FollowAdapter(Followings.this, userList);
-                recyclerView.setAdapter(followAdapter);
-                if (response.isSuccessful()) {
-                    Toast.makeText(Followings.this, "loading", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(Followings.this, UserSearchProfileActivity.class));
-                    finish();
+            public void onResponse(Call<FollowResponse> call, Response<FollowResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    userList = response.body().getListFollow();
+                    if (userList != null && userList.size() > 0) {
+                        followAdapter = new FollowAdapter(Followings.this, userList);
+                        recyclerView.setAdapter(followAdapter);
+
+                    } else {
+                        Toast.makeText(Followings.this, "Không có người đang theo dõi", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    // Handle the error
-
+                    Toast.makeText(Followings.this, "Không có người đang theo dõi", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(Followings.this, "Failed to load followers", Toast.LENGTH_SHORT).show();
             }
-        }
 
-        @Override
-        public void onFailure(Call<FollowResponse> call, Throwable throwable) {
-            Toast.makeText(Followings.this, "An error occurred", Toast.LENGTH_SHORT).show();
-
-        }
-    });
+            @Override
+            public void onFailure(Call<FollowResponse> call, Throwable throwable) {
+                Toast.makeText(Followings.this, "Không có người đang theo dõi", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -12,6 +12,7 @@ import com.example.instagramapp.ModelAPI.SingleUserResponse;
 import com.example.instagramapp.ModelAPI.Users;
 import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
+import com.example.instagramapp.ModelAPI.PostByIdResponse;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.ModelAPI.UserResponse;
@@ -124,6 +125,11 @@ public interface APIService {
     Call<FollowResponse> getFollowers(@Path("id") int id);
     @GET("users/{id}/followings")
     Call<FollowResponse> getFollowings(@Path("id") int id,
-            @Query("pageNum") int pageNum,
-            @Query("pageSize") int pageSize);
+                                       @Query("pageNum") int pageNum,
+                                       @Query("pageSize") int pageSize);
+
+    @GET("users/{userId}/posts")
+    Call<PostByIdResponse> getUserPosts(
+            @Path("userId") int userId,
+            @Query("pageNum") int pageNum);
 }
