@@ -14,6 +14,7 @@ import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.ModelAPI.User;
+import com.example.instagramapp.ModelAPI.UserResponse;
 
 import java.util.List;
 import com.example.instagramapp.ModelAPI.CheckedLikeResponse;
@@ -64,6 +65,18 @@ public interface APIService {
             @Query("pageNum") int pageNum,
             @Query("pageSize") int pageSize
     );
+
+    @GET("users")
+    Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
+                                  @Query("pageSize") int pageSize);
+    @GET("users/{id}")
+    Call<UserResponse_findOne> getUser(@Path("id") String id);
+
+    @PATCH(value = "users")
+    Call<UserResponse> getEditProfile(@Body User user);
+
+    @GET("users/{id}/followers")
+    Call<FollowResponse> getFollowers(@Path("id") int id);
 
     // like
     @POST("users/{userId}/likeList/posts/{postId}")
