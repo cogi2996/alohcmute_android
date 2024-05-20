@@ -34,16 +34,6 @@
                 android:textStyle="bold"
                 android:layout_weight="1"
                 android:id="@+id/profileName"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:id="@+id/userId"/>
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
@@ -68,12 +58,6 @@
         android:weightSum="100">
 
         <!--Photo relative layout-->
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -101,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="1dp">
+                android:padding="10dp">
 
 
                 <LinearLayout
@@ -202,15 +186,14 @@
                 </LinearLayout>
 
                 <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
                     android:id="@+id/edit_profile"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
                     android:background="@drawable/btn_shape_1"
                     android:text="Edit Profile"
                     android:textAllCaps="false"
-                    android:textSize="15sp"
-                    android:gravity="center" />
+                    android:textSize="18sp"
+                    android:layout_gravity="end"/>
 
 
             </LinearLayout>
@@ -236,23 +219,23 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:id="@+id/firstName"
+            android:id="@+id/display_name"
             android:maxLines="1"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Biography"
+            android:text="Description"
             android:textColor="@color/black"
             android:textSize="14sp"
-            android:id="@+id/bio"
+            android:id="@+id/description"
             android:maxLines="3"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Department"
+            android:text="Website"
             android:textColor="@color/blue_link"
             android:textSize="14sp"
-            android:id="@+id/department"
+            android:id="@+id/website"
             android:maxLines="1"/>
 
 

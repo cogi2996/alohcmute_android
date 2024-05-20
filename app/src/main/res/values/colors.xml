@@ -21,7 +21,7 @@
     <color name="dark_purple">#23002b</color>
     <color name="red">#FA2516</color>
 
-<!--    tuan add-->
+    <!--    tuan add-->
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="app_name">#D7000000</color>
@@ -43,5 +43,9 @@
     <color name="background_message">#8E3EFF</color>
     <color name="text_message">#E6FFFFFF</color>
     <color name="text_light_blue">#1D6FEC</color>
+    <color name="primaryTextColor">#2661FA</color>
+    <color name="whiteTextColor">#fff</color>
+
+
 
 </resources>

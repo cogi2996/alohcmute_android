@@ -68,30 +68,29 @@ public class Login extends AppCompatActivity {
                         mDialog.setCancelable(false);
                         mDialog.setMessage("Logging in...");
                         mDialog.show();
-                        signupInToServer();
-//                        FAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<AuthResult> task) {
-//                                if (task.isSuccessful()) {
-//                                    mDialog.dismiss();
-//                                    if (FAuth.getCurrentUser().isEmailVerified()) {
-//                                        mDialog.dismiss();
-//                                        Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
-//                                        signupInToServer();
+                        FAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    mDialog.dismiss();
+                                    if (FAuth.getCurrentUser().isEmailVerified()) {
+                                        mDialog.dismiss();
+                                        Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
+                                        signupInToServer();
 //                                        Intent z = new Intent(Login.this, Home.class);
 //                                        startActivity(z);
 //                                        finish();
-//                                    } else {
-//                                        ReusableCodeForAll.ShowAlert(Login.this, "", "Please Verify your Email");
-//                                    }
-//
-//                                } else {
-//
-//                                    mDialog.dismiss();
-//                                    ReusableCodeForAll.ShowAlert(Login.this, "Error", task.getException().getMessage());
-//                                }
-//                            }
-//                        });
+                                    } else {
+                                        ReusableCodeForAll.ShowAlert(Login.this, "", "Please Verify your Email");
+                                    }
+
+                                } else {
+
+                                    mDialog.dismiss();
+                                    ReusableCodeForAll.ShowAlert(Login.this, "Error", task.getException().getMessage());
+                                }
+                            }
+                        });
 
                     }
                 }

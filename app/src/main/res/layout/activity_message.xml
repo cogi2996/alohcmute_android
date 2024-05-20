@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Messages.MessageActivity"
+    tools:context=".Messenger.MessageActivity"
     android:background="@color/white">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -12,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="#EFEEEE"
         android:id="@+id/MessageActivity_bar_layout">
-        
+
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,13 +42,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/MessageActivity_userName"
-                    android:text="Username"
+                    android:id="@+id/MessageActivity_firstName"
+                    android:text="FirstName"
                     android:maxLines="1"/>
 
-
             </LinearLayout>
-
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -98,6 +95,5 @@
             android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
-
 
 </RelativeLayout>
