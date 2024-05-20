@@ -13,17 +13,18 @@
       android:layout_above="@id/insta_bottom_navigation"/>
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
+      android:id="@+id/insta_bottom_navigation"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:id="@+id/insta_bottom_navigation"
       android:layout_alignParentBottom="true"
+      android:layout_marginBottom="2dp"
       android:background="?android:attr/windowBackground"
       android:backgroundTint="@color/white"
-      app:itemTextColor="@color/menu_item_color"
       app:itemIconTint="@color/menu_item_color"
-      app:menu="@menu/home_menu"
-      app:labelVisibilityMode="selected"/>
-<!--  <Toolbar-->
+      app:itemTextColor="@color/menu_item_color"
+      app:labelVisibilityMode="selected"
+      app:menu="@menu/home_menu" />
+  <!--  <Toolbar-->
 <!--      android:layout_width="match_parent"-->
 <!--      android:layout_height="56dp"-->
 <!--      android:layout_alignParentTop="true"-->
