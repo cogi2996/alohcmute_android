@@ -95,9 +95,6 @@ public interface APIService {
     @POST("users/current")
     Call<CurrentUserResponse> getCurrentUser();
 
-    @GET("users")
-    Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
-                                  @Query("pageSize") int pageSize);
     //find user by id
     @GET("users/{userId}")
     Call<CurrentUserResponse> getUserById(@Path("userId") int userId);
