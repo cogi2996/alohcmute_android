@@ -202,6 +202,8 @@
                 </LinearLayout>
 
                 <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
                     android:id="@+id/edit_profile"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
