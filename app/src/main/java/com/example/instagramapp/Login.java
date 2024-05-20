@@ -160,8 +160,8 @@ public class Login extends AppCompatActivity {
                 // save token in shared preferences
                 SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                Log.d("YYYY", "onResponse: " + access_token);
                 myEdit.putString("access_token", access_token);
-
                 myEdit.apply();
                 // save in shared preferences
                 Intent z = new Intent(Login.this, Home.class);

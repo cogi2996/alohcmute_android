@@ -1,6 +1,7 @@
 package com.example.instagramapp.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.instagramapp.Adapter.PostAdapter;
+import com.example.instagramapp.LockAccountActivity;
 import com.example.instagramapp.ModelAPI.Post;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.retrofit.APIService;
@@ -115,6 +117,16 @@ public class HomeFragment extends Fragment {
                     return;
                 }
                 responseDTO = response.body();
+                Log.d("xyxxy", responseDTO.getMessage());
+                if(responseDTO.getMessage().equals("LOCK")){
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                    myEdit.clear();
+                    myEdit.apply();
+                    Intent z = new Intent(getContext(), LockAccountActivity.class);
+                    startActivity(z);
+                    getActivity().finish();
+                }
                 List<Post> newPosts = responseDTO.getListPost();
                 listPost.addAll(newPosts);
                 postAdapter.notifyDataSetChanged();

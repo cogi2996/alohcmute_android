@@ -17,10 +17,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".LockAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".OTPActivity"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".SinglePostActivity"
@@ -38,7 +41,7 @@
             android:name=".Home"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
