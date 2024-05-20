@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -18,9 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.instagramapp.Adapter.PostAdapter;
+import com.example.instagramapp.Home;
 import com.example.instagramapp.LockAccountActivity;
+import com.example.instagramapp.Messenger.ChatActivity;
 import com.example.instagramapp.ModelAPI.Post;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
+import com.example.instagramapp.OTPActivity;
 import com.example.instagramapp.retrofit.APIService;
 import com.example.instagramapp.retrofit.RetrofitClient;
 
@@ -45,6 +49,7 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "HomeFragment";
     ProgressBar progressBar;
     SwipeRefreshLayout swipeRefreshLayout;
+    ImageView sendView;
 
     @Nullable
     @Override
@@ -53,11 +58,22 @@ public class HomeFragment extends Fragment {
         Log.d(TAG, "onCreateView");
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("access_token", "");
+        int userId = sharedPreferences.getInt("userId", 42);
+
         Log.d(TAG, "Token: " + token);
+        Log.d("SKSKSKSKSK", "currentUserId: " + userId);
         AnhXa(v);
         setupRecyclerView();
         setupSwipeRefreshLayout();
         loadNewPost();
+        sendView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent z = new Intent(getContext(), ChatActivity.class);
+                startActivity(z);
+            }
+        });
+
         return v;
     }
 
@@ -65,6 +81,7 @@ public class HomeFragment extends Fragment {
         rcPost = v.findViewById(R.id.recyclerview_posts);
         progressBar = v.findViewById(R.id.load_progress);
         swipeRefreshLayout = v.findViewById(R.id.swipe_refresh_layout);
+        sendView = v.findViewById(R.id.FragmentHome_msg);
     }
 
     private void setupRecyclerView() {

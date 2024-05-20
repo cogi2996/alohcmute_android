@@ -14,9 +14,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.instagramapp.Adapter.Comment;
 import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
+import com.example.instagramapp.ModelAPI.CurrentUserResponse;
 import com.example.instagramapp.ModelAPI.LoginResponse;
+import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.retrofit.APIService;
 import com.example.instagramapp.retrofit.RetrofitClient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -162,8 +165,30 @@ public class Login extends AppCompatActivity {
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
                 Log.d("YYYY", "onResponse: " + access_token);
                 myEdit.putString("access_token", access_token);
+//                myEdit.putInt("userId", user.getUserId());
                 myEdit.apply();
-                // save in shared preferences
+//                Call<CurrentUserResponse> call2 = apiService.getCurrentUser();
+//                call2.enqueue(new Callback<CurrentUserResponse>() {
+//                    @Override
+//                    public void onResponse(Call<CurrentUserResponse> call2, Response<CurrentUserResponse> response) {
+//                        if (response.isSuccessful()) {
+//                            User user = response.body().getUser();
+//
+//                            // The comment will be added through ChildEventListener
+//                            // save in shared preferences
+//                            Intent z = new Intent(Login.this, Home.class);
+//                            startActivity(z);
+//                            finish();
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<CurrentUserResponse> call, Throwable t) {
+//                        // Handle error
+//                    }
+//                });
+//                // save in shared preferences
                 Intent z = new Intent(Login.this, Home.class);
                 startActivity(z);
                 finish();

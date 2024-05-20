@@ -59,6 +59,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
             startActivity(new Intent(Home.this, PostActivity.class));
         } else if (itemId == R.id.likes) {
             fragment = new LikeFragment();
+
         } else if (itemId == R.id.profile) {
             fragment = new ProfileFragment();
         }

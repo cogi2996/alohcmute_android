@@ -57,7 +57,7 @@
 
         <activity android:name=".Profile.Account_Settings" />
         <activity
-            android:name=".Login"
+            android:name=".Home"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
 
@@ -68,13 +68,13 @@
 
         </activity>
         <activity
-            android:name=".Home"
+            android:name=".Profile.ResetPasswordUser"
             android:exported="false"
             android:windowSoftInputMode="adjustPan">
 
         </activity>
         <activity
-            android:name=".Profile.ResetPasswordUser"
+            android:name=".Login"
             android:exported="true">
 
             <intent-filter>
