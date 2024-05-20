@@ -1,6 +1,7 @@
 package com.example.instagramapp.Utils;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,6 +95,7 @@ public class CommentListAdapter extends ArrayAdapter<Comments> {
                 for ( DataSnapshot singleSnapshot :  dataSnapshot.getChildren()){
 
                     //set the comment
+                    Log.d("tttt", "xxx");
                     holder.comment.setText(singleSnapshot.getValue(Users.class)
                             .getUsername()+" "+getItem(position).getComment());
 

@@ -1,5 +1,6 @@
 package com.example.instagramapp.retrofit;
 
+import com.example.instagramapp.ModelAPI.Account;
 import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
 import com.example.instagramapp.ModelAPI.ChangePasswordRespone;
@@ -10,6 +11,18 @@ import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.ModelAPI.User;
+
+import java.util.List;
+import com.example.instagramapp.ModelAPI.CheckedLikeResponse;
+import com.example.instagramapp.ModelAPI.CurrentUserResponse;
+import com.example.instagramapp.ModelAPI.Department;
+import com.example.instagramapp.ModelAPI.DepartmentResponse;
+import com.example.instagramapp.ModelAPI.LikePostResponse;
+import com.example.instagramapp.ModelAPI.MajorResponse;
+import com.example.instagramapp.ModelAPI.Post;
+import com.example.instagramapp.ModelAPI.ResponseDTO;
+import com.example.instagramapp.ModelAPI.User;
+import com.example.instagramapp.ModelAPI.UserResponse;
 
 import java.util.List;
 
@@ -41,7 +54,6 @@ public interface APIService {
     @POST("auth/change-password")
     Call<ChangePasswordRespone> changePassword(@Body ResetPassword resetPassword);
 
-
     //tin
     @GET("users/search")
     Call<UserResponse> searchUserByName(
@@ -51,8 +63,34 @@ public interface APIService {
     );
 
     @GET("users")
+    Call<List<User>> getAllUsers(@Query("pageNum") int pageNum,
+                                 @Query("pageSize") int pageSize);
+
+
+    // like
+    @POST("users/{userId}/likeList/posts/{postId}")
+    Call<LikePostResponse> likePost(@Path("userId") int userId, @Path("postId") int postId);
+
+    // unlike post
+    @DELETE("users/{userId}/likeList/posts/{postId}")
+    Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
+
+    //tin
+    @GET("users/search")
+    Call<UserResponse> searchUserByName(
+            @Query("name") String name,
+            @Query("pageNum") int pageNum,
+            @Query("pageSize") int pageSize
+    );
+    @POST("users/current")
+    Call<CurrentUserResponse> getCurrentUser();
+
+    @GET("users")
     Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
                                   @Query("pageSize") int pageSize);
+    //find user by id
+    @GET("users/{userId}")
+    Call<CurrentUserResponse> getUserById(@Path("userId") int userId);
 
     // like
     @POST("users/{userId}/likeList/posts/{postId}")
@@ -60,8 +98,25 @@ public interface APIService {
     // unlike post
     @DELETE("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
+    // find all department
+    @GET("department")
+    Call<DepartmentResponse> getAllDepartment();
 
+    // find department by id
+    @GET("department/{id}")
+    Call<Department> getDepartmentById(@Path("id") int id);
 
+    @GET("department/{id}/major")
+    Call<MajorResponse> getMajorByDepartmentId(@Path("id") int id);
 
+    @POST("auth/register")
+    Call<AuthenticationResponse> register(@Body Account accountDTO);
+
+    // find one post
+    @GET("posts/{postId}")
+    Call<Post> getPostById(@Path("postId") int postId);
+
+    @GET("posts/{postId}/like/check")
+    Call<CheckedLikeResponse> checkUserLikePost(@Path("postId") int postId);
 
 }
