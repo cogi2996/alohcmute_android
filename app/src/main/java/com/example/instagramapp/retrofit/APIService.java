@@ -1,11 +1,20 @@
 package com.example.instagramapp.retrofit;
 
+import com.example.instagramapp.ModelAPI.Account;
 import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
+import com.example.instagramapp.ModelAPI.CheckedLikeResponse;
+import com.example.instagramapp.ModelAPI.CurrentUserResponse;
+import com.example.instagramapp.ModelAPI.Department;
+import com.example.instagramapp.ModelAPI.DepartmentResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
 import com.example.instagramapp.ModelAPI.NewPostRequest;
 import com.example.instagramapp.ModelAPI.NotificationUniversity;
 import com.example.instagramapp.ModelAPI.NotificationUniversityResponse;
+import com.example.instagramapp.ModelAPI.Post;
+import com.example.instagramapp.ModelAPI.MajorResponse;
+import com.example.instagramapp.ModelAPI.OTPRequest;
+import com.example.instagramapp.ModelAPI.OTPResponse;
 import com.example.instagramapp.ModelAPI.Post;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.ModelAPI.User;
@@ -63,5 +72,35 @@ public interface APIService {
     // unlike post
     @DELETE("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
+
+    @POST("users/current")
+    Call<CurrentUserResponse> getCurrentUser();
+
+    //find user by id
+    @GET("users/{userId}")
+    Call<CurrentUserResponse> getUserById(@Path("userId") int userId);
+
+    // find all department
+    @GET("department")
+    Call<DepartmentResponse> getAllDepartment();
+
+    // find department by id
+    @GET("department/{id}")
+    Call<Department> getDepartmentById(@Path("id") int id);
+
+    @GET("department/{id}/major")
+    Call<MajorResponse> getMajorByDepartmentId(@Path("id") int id);
+
+    @POST("auth/register")
+    Call<AuthenticationResponse> register(@Body Account accountDTO);
+
+    // find one post
+    @GET("posts/{postId}")
+    Call<Post> getPostById(@Path("postId") int postId);
+
+    @GET("posts/{postId}/like/check")
+    Call<CheckedLikeResponse> checkUserLikePost(@Path("postId") int postId);
+    @POST("auth/register/OTP")
+    Call<OTPResponse> registerOTP(@Body OTPRequest otp);
 
 }

@@ -45,5 +45,9 @@
     <color name="text_light_blue">#1D6FEC</color>
     <color name="text_light_blue2">#FF3790FF</color>
     <color name="be">#FFEEEED1</color>
+    <color name="primaryTextColor">#2661FA</color>
+    <color name="whiteTextColor">#fff</color>
+
+
 
 </resources>
