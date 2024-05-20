@@ -27,7 +27,7 @@ public class RetrofitClient {
                     .build();
         }
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://172.25.0.1:8080/api/v1/")
+                .baseUrl("http://192.168.1.161:8080/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
@@ -39,7 +39,7 @@ public class RetrofitClient {
         if (retrofit == null) {
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://172.25.0.1:8080/api/v1/")
+                    .baseUrl("http://192.168.1.161:8080/api/v1/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
