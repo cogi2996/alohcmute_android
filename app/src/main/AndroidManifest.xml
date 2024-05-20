@@ -35,10 +35,10 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Profile.Account_Settings" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".Home"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Home"
+            android:name=".RegisterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

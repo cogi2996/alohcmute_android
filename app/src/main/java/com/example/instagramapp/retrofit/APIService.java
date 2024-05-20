@@ -9,6 +9,8 @@ import com.example.instagramapp.ModelAPI.Department;
 import com.example.instagramapp.ModelAPI.DepartmentResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
 import com.example.instagramapp.ModelAPI.MajorResponse;
+import com.example.instagramapp.ModelAPI.OTPRequest;
+import com.example.instagramapp.ModelAPI.OTPResponse;
 import com.example.instagramapp.ModelAPI.Post;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.ModelAPI.User;
@@ -84,5 +86,7 @@ public interface APIService {
 
     @GET("posts/{postId}/like/check")
     Call<CheckedLikeResponse> checkUserLikePost(@Path("postId") int postId);
+    @POST("auth/register/OTP")
+    Call<OTPResponse> registerOTP(@Body OTPRequest otp);
 
 }

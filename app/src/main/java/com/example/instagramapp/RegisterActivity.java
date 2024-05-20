@@ -3,6 +3,8 @@ package com.example.instagramapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -130,8 +132,19 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<AuthenticationResponse> call, Response<AuthenticationResponse> response) {
                         if (response.isSuccessful()) {
+
                             // Handle the response here
                             Log.d("LLLLLLLL", "onResponse: " + response.body().getAccess_token());
+                            String access_token = response.body().getAccess_token();
+                            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+                            SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                            myEdit.putString("access_token", access_token);
+
+                            myEdit.apply();
+                            // save in shared preferences
+                            Intent z = new Intent(RegisterActivity.this, OTPActivity.class);
+                            startActivity(z);
+                            finish();
                         }
                     }
                     @Override
