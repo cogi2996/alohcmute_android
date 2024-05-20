@@ -18,11 +18,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.instagramapp.ModelAPI.SingleUserResponse;
-import com.example.instagramapp.ModelAPI.UserResponse;
-import com.example.instagramapp.ModelAPI.Users;
-import com.example.instagramapp.retrofit.APIService;
-import com.example.instagramapp.retrofit.RetrofitClient;
+import com.example.instagramapp.ModelAPI.ImagePostDTO;
+import com.example.instagramapp.ModelAPI.Post;
+import com.example.instagramapp.ModelAPI.PostByIdResponse;
+import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.ModelAPI.UserResponse_findOne;
 import com.example.instagramapp.Search.SearchUserAdapter;
@@ -65,7 +64,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_profile, null);
         userId = (TextView) v.findViewById(R.id.userId);
-        userId.setText(String.valueOf(41));
         account_setting_menu = (ImageView) v.findViewById(R.id.account_settingMenu);
         editProfile = (Button) v.findViewById(R.id.edit_profile);
         profilePhoto = (ImageView) v.findViewById(R.id.user_img);
@@ -140,39 +138,16 @@ public class ProfileFragment extends Fragment {
 
                     gridView.setAdapter(imageAdapter);
                     mProgressBar.setVisibility(View.GONE);
-                } else {
-                    // Nếu không tải được hình ảnh từ API, set hình ảnh cứng
-//                    imageAdapter = new ImageAdapter(requireContext(),
-//                            R.layout.layout_grid_imageview,
-//                            getDefaultImagePostDTO()
-//                    );
-//                    gridView.setAdapter(imageAdapter);
-//                    mProgressBar.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<PostByIdResponse> call, Throwable throwable) {
                 Log.d("LogFail", throwable.getMessage());
-
-                // Nếu không tải được hình ảnh từ API, set hình ảnh cứng
-//                imageAdapter = new ImageAdapter(requireContext(),
-//                        R.layout.layout_grid_imageview,
-//                        getDefaultImagePostDTO()
-//                );
-//                gridView.setAdapter(imageAdapter);
-//                mProgressBar.setVisibility(View.GONE);
             }
         });
     }
-//    private List<ImagePostDTO> getDefaultImagePostDTO() {
-//        List<ImagePostDTO> defaultImagePostDTO = new ArrayList<>();
-//        // Thiết lập dữ liệu hình ảnh cứng ở đây
-//        defaultImagePostDTO.add(new ImagePostDTO("", "Image 1"));
-//        defaultImagePostDTO.add(new ImagePostDTO("", "Image 2"));
-//        defaultImagePostDTO.add(new ImagePostDTO("", "Image 3"));
-//        return defaultImagePostDTO;
-//    }
+
 
     private void getUserData(String userId) {
         APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
@@ -188,10 +163,15 @@ public class ProfileFragment extends Fragment {
                         name.setText(user.getFirstName());
                         biography.setText(user.getBiography());
                         department.setText(user.getDepartment());
+                        if (user.getAvatar() != null && !user.getAvatar().isEmpty()) {
+                            Glide.with(ProfileFragment.this)
+                                    .load(user.getAvatar())
+                                    .into(profilePhoto);
+                        } else {
+                            // Use a default avatar image if the user doesn't have one
+                            profilePhoto.setImageResource(R.drawable.user);
+                        }
 
-                        Glide.with(ProfileFragment.this)
-                                .load(user.getAvatar())
-                                .into(profilePhoto);
                     }
                 }
             }

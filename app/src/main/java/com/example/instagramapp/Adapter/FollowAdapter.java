@@ -28,13 +28,13 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.MyViewHold
 
     @NonNull
     @Override
-    public FollowAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_search_items, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FollowAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         User user = userList.get(position);
         String fullName = user.getLastName() + " " + (user.getMidName() != null ? user.getMidName() + " " : "") + user.getFirstName();
         holder.fullname.setText(fullName);

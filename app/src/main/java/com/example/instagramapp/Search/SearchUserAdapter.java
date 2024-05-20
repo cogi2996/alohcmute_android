@@ -33,13 +33,13 @@ public class SearchUserAdapter extends RecyclerView.Adapter<SearchUserAdapter.My
 
     @NonNull
     @Override
-    public SearchUserAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.user_search_items, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchUserAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         // setting data to our views of recycler view.
         User user = userList.get(position);
         String fullName = user.getLastName() + " " + user.getMidName() + " " + user.getFirstName()+ " " ;
