@@ -138,39 +138,16 @@ public class ProfileFragment extends Fragment {
 
                     gridView.setAdapter(imageAdapter);
                     mProgressBar.setVisibility(View.GONE);
-                } else {
-                    // Nếu không tải được hình ảnh từ API, set hình ảnh cứng
-//                    imageAdapter = new ImageAdapter(requireContext(),
-//                            R.layout.layout_grid_imageview,
-//                            getDefaultImagePostDTO()
-//                    );
-//                    gridView.setAdapter(imageAdapter);
-//                    mProgressBar.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<PostByIdResponse> call, Throwable throwable) {
                 Log.d("LogFail", throwable.getMessage());
-
-                // Nếu không tải được hình ảnh từ API, set hình ảnh cứng
-//                imageAdapter = new ImageAdapter(requireContext(),
-//                        R.layout.layout_grid_imageview,
-//                        getDefaultImagePostDTO()
-//                );
-//                gridView.setAdapter(imageAdapter);
-//                mProgressBar.setVisibility(View.GONE);
             }
         });
     }
-//    private List<ImagePostDTO> getDefaultImagePostDTO() {
-//        List<ImagePostDTO> defaultImagePostDTO = new ArrayList<>();
-//        // Thiết lập dữ liệu hình ảnh cứng ở đây
-//        defaultImagePostDTO.add(new ImagePostDTO("", "Image 1"));
-//        defaultImagePostDTO.add(new ImagePostDTO("", "Image 2"));
-//        defaultImagePostDTO.add(new ImagePostDTO("", "Image 3"));
-//        return defaultImagePostDTO;
-//    }
+
 
     private void getUserData(String userId) {
         APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
@@ -186,10 +163,15 @@ public class ProfileFragment extends Fragment {
                         name.setText(user.getFirstName());
                         biography.setText(user.getBiography());
                         department.setText(user.getDepartment());
+                        if (user.getAvatar() != null && !user.getAvatar().isEmpty()) {
+                            Glide.with(ProfileFragment.this)
+                                    .load(user.getAvatar())
+                                    .into(profilePhoto);
+                        } else {
+                            // Use a default avatar image if the user doesn't have one
+                            profilePhoto.setImageResource(R.drawable.user);
+                        }
 
-                        Glide.with(ProfileFragment.this)
-                                .load(user.getAvatar())
-                                .into(profilePhoto);
                     }
                 }
             }
