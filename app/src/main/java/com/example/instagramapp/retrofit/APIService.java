@@ -4,6 +4,7 @@ import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
 import com.example.instagramapp.ModelAPI.NewPostRequest;
+import com.example.instagramapp.ModelAPI.NotificationUniversity;
 import com.example.instagramapp.ModelAPI.NotificationUniversityResponse;
 import com.example.instagramapp.ModelAPI.Post;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
@@ -49,8 +50,8 @@ public interface APIService {
     @POST("posts")
     Call<Post> createPost(@Body NewPostRequest request);
 
-    @GET("notification")
-    Call<NotificationUniversityResponse> getAllNotiUniversity(
+    @GET("notification/university")
+    Call<List<NotificationUniversity>> getAllNotiUniversity(
             @Query("pageNum") int pageNum,
             @Query("pageSize") int pageSize
     );

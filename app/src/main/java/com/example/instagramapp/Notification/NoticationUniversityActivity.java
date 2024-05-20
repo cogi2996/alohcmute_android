@@ -2,6 +2,7 @@ package com.example.instagramapp.Notification;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NoticationUniversityActivity extends Fragment {
+public class NoticationUniversityActivity extends AppCompatActivity {
     private static final String TAG ="NoticationUniversity" ;
     private RecyclerView recyclerView;
     private NotificationUniversityAdapter notificationUniversityAdapter;
@@ -43,57 +44,51 @@ public class NoticationUniversityActivity extends Fragment {
     APIService apiService;
     private NotificationUniversityResponse notificationUniversityResponse;
     TextView tittle,discription;
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_notication_university,null);
-        //AnhXa();
-        recyclerView = (RecyclerView)v.findViewById(R.id.FragmentUniversity_recyclerView);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        loadNotiUniversity(0,20);
-        return v;
-    }
-
-    private void loadNotiUniversity(int pageNum, int pageSize) {
-        mNotificationUniversity = new ArrayList<>();
-        apiService = RetrofitClient.getRetrofit().create(APIService.class);
-
-        apiService.getAllNotiUniversity(pageNum,pageSize).enqueue(new Callback<NotificationUniversityResponse>() {
-            @Override
-            public void onResponse(Call<NotificationUniversityResponse> call, Response<NotificationUniversityResponse> response) {
-                if (response.isSuccessful()) {
-                    Log.d(TAG, "Loi o day13");
-
-                    notificationUniversityResponse = response.body();
-                    mNotificationUniversity = notificationUniversityResponse.getListNotificationUniversity();
-                    notificationUniversityAdapter = new NotificationUniversityAdapter(mNotificationUniversity, getContext());
-                    recyclerView.setAdapter(notificationUniversityAdapter);
-                    Log.d(TAG, "Loi o day14");
-
-                } else {
-                    // Handle error
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NotificationUniversityResponse> call, Throwable throwable) {
-                Log.d("LogFail", throwable.getMessage());
-            }
-        });
-    }
-    /*
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notication_university);
-        tittle = (TextView)findViewById(R.id.tvTitle);
+        recyclerView = (RecyclerView)findViewById(R.id.FragmentUniversity_recyclerView);
 
-        recyclerView = (RecyclerView).findViewById(R.id.recycler_view_search);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        search = (EditText)v.findViewById(R.id.search_user);
-        backFromPost = (ImageView)findViewById(R.id.back_from_post);
-    }*/
+        if (recyclerView != null) {
+            loadNotiUniversity(0, 20);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager( this, LinearLayoutManager. VERTICAL, false);
+            recyclerView.setLayoutManager (linearLayoutManager);
+        } else {
+            // Handle the case where recyclerView is null
+            Log.e(TAG, "recyclerView is null");
+        }
+    }
+
+    private void loadNotiUniversity(int pageNum, int pageSize) {
+        Log.e(TAG, "recyclerView is null 2");
+        mNotificationUniversity = new ArrayList<>();
+        apiService = RetrofitClient.getRetrofitAuth(NoticationUniversityActivity.this).create(APIService.class);
+        apiService.getAllNotiUniversity(pageNum, pageSize).enqueue(new Callback<List<NotificationUniversity>>() {
+            @Override
+            public void onResponse(Call<List<NotificationUniversity>> call, Response<List<NotificationUniversity>> response) {
+
+                Log.d("Notice", String.valueOf(response.code()));
+//                Log.d("Notice", String.valueOf(response.errorBody()));
+                Log.d("url", String.valueOf(response.raw()));
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "Loi o day13");
+
+                    mNotificationUniversity = response.body();
+                    //mNotificationUniversity = notificationUniversityResponse.getListNotificationUniversity();
+                    notificationUniversityAdapter = new NotificationUniversityAdapter(mNotificationUniversity, NoticationUniversityActivity.this);
+                    recyclerView.setAdapter(notificationUniversityAdapter);
+                    Log.d(TAG, "Loi o day14");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<NotificationUniversity>> call, Throwable throwable) {
+
+            }
+        });
+
+    }
+
 }

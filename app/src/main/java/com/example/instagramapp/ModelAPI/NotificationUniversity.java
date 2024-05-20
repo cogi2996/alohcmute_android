@@ -14,10 +14,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotificationUniversity implements Serializable {
-    @SerializedName("idNoti")
+    @SerializedName("id")
     private int idNoti;
-    @SerializedName("tittle")
+    @SerializedName("title")
     private String tittle;
-    @SerializedName("discription")
+    @SerializedName("text")
     private String discription;
 }

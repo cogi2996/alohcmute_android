@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Notification.NoticationUniversityActivity"
+            android:name=".Login"
             android:exported="false" />
         <activity android:name=".Stories.StoryActivity" />
         <activity android:name=".Stories.AddStoryActivity" />
@@ -29,10 +29,10 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".Profile.Account_Settings" />
         <activity
-            android:name=".Login"
+            android:name=".Home"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".Home"
+            android:name=".Notification.NoticationUniversityActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

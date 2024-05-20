@@ -22,7 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:id="@+id/FragmentLike_linearlayout">
+            android:id="@+id/FragmentLike_linearlayout"
+            android:background="@color/be">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,7 +34,8 @@
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:gravity="center_vertical"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp"
+                />
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

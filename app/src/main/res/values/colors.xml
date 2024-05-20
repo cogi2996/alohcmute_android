@@ -43,5 +43,7 @@
     <color name="background_message">#8E3EFF</color>
     <color name="text_message">#E6FFFFFF</color>
     <color name="text_light_blue">#1D6FEC</color>
+    <color name="text_light_blue2">#FF3790FF</color>
+    <color name="be">#FFEEEED1</color>
 
 </resources>
