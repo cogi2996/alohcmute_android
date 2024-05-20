@@ -25,6 +25,7 @@ firebaseMessaging = "24.0.0"
 firebaseBom = "33.0.0"
 firebaseIid = "21.1.0"
 lombok = "1.18.32"
+picasso = "2.71828"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -51,6 +52,7 @@ firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-iid = { group = "com.google.firebase", name = "firebase-iid", version.ref = "firebaseIid" }
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
+picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "picasso" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

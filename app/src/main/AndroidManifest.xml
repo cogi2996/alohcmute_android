@@ -4,8 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,42 +16,64 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InstagramApp"
-        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".SavePostActivity"
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".OTPActivity"
             android:exported="false" />
         <activity
-            android:name=".OTPActicity"
-            android:exported="false" />
-        <activity
             android:name=".Login"
-            android:exported="false" />
-        <activity
-            android:name=".Home"
-            android:exported="false" />
-        <activity android:name=".Stories.StoryActivity" />
-        <activity android:name=".Stories.AddStoryActivity" />
-        <activity android:name=".Profile.FollowersFollowing" />
-        <activity android:name=".Search.UserSearchProfileActivity" />
-        <activity android:name=".Post.PostActivity" />
-        <activity android:name=".VerifyPhone" />
-        <activity android:name=".CommentsActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Profile.Account_Settings" />
-        <activity
-            android:name=".RegisterActivity"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".SinglePostActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
 
+        </activity>
+        <activity android:name=".Stories.StoryActivity" />
+        <activity android:name=".Stories.AddStoryActivity" />
+        <activity android:name=".Profile.FollowersFollowing" />
+        <activity android:name=".Search.UserSearchProfileActivity" />
+        <activity android:name=".Post.PostActivity" />
+        <activity
+            android:name=".Messenger.MessageActivity"
+            android:parentActivityName=".Messenger.ChatActivity" />
+        <activity
+            android:name=".Messenger.ChatActivity"
+            android:exported="false">
+
+        </activity>
+        <activity android:name=".VerifyPhone" />
+        <activity android:name=".CommentsActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".Profile.Account_Settings" />
+        <activity
+            android:name=".Profile.EditProfile"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".Home"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:name=".Profile.ResetPasswordUser"
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".SinglePostActivity"
+            android:exported="false">
+
+
+        </activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

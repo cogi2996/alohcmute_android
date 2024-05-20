@@ -1,7 +1,6 @@
 package com.example.instagramapp.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.instagramapp.CommentsActivity;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
 import com.example.instagramapp.ModelAPI.Post;
 import com.example.instagramapp.R;
@@ -59,7 +57,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         holder.countLike.setText(String.valueOf(post.getCountLike()));
         holder.txt_username.setText(post.getUser().getFullName());
 
-
         holder.update();
 //        holder.liked.setChecked(post.isLiked());
         Glide.with(context)
@@ -71,13 +68,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(holder.postImage);
         holder.liked.setOnClickListener(v -> holder.toggleLike());
-        holder.btn_comment.setOnClickListener(v -> {
-            // go to comment activity
-            Intent intent = new Intent(context, CommentsActivity.class);
-            Log.d("jksdjfjjj", "onBindViewHolder: "+post.getPostId());
-            intent.putExtra("postId", String.valueOf(post.getPostId()));
-            context.startActivity(intent);
-        });
+
         // kiem tra neu da like thi set lai la like
 
 
@@ -97,7 +88,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView postText, postCreateTime, countLike, txt_username;
         private ImageView postImage;
-        private ImageView liked,img_profile, btn_comment;
+        private ImageView liked,img_profile;
         private Post post;
         private PostAdapter adapter;
         private Boolean checkIfLiked;
@@ -113,10 +104,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
             liked = itemView.findViewById(R.id.btn_like);
             txt_username = itemView.findViewById(R.id.txt_username);
             img_profile = itemView.findViewById(R.id.img_profile);
-            btn_comment = itemView.findViewById(R.id.btn_comment);
             this.adapter = adapter;
             apiService = RetrofitClient.getRetrofitAuth(context).create(APIService.class);
-
         }
 
         public void update() {
