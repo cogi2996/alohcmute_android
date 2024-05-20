@@ -17,6 +17,8 @@
         <activity
             android:name=".LockAccountActivity"
             android:exported="false" />
+        <activity android:name=".CommentsActivity" android:exported="false" />
+
         <activity
             android:name=".OTPActivity"
             android:exported="false" />
@@ -32,19 +34,23 @@
         <activity android:name=".Search.UserSearchProfileActivity" />
         <activity android:name=".Post.PostActivity" />
         <activity android:name=".VerifyPhone" />
-        <activity android:name=".Registration" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Profile.Account_Settings" />
         <activity
             android:name=".Login"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".Notification.NoticationUniversityActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Home"
+            android:exported="false"/>
+        <activity
+            android:name=".Notification.NoticationUniversityActivity"
+            android:exported="false">
+
         </activity>
 
         <meta-data
