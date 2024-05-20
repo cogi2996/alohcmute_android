@@ -36,10 +36,16 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull FollowAdapter.MyViewHolder holder, int position) {
         User user = userList.get(position);
-        String fullName = user.getFirstName() + " " + (user.getMidName() != null ? user.getMidName() + " " : "") + user.getLastName();
+        String fullName = user.getLastName() + " " + (user.getMidName() != null ? user.getMidName() + " " : "") + user.getFirstName();
         holder.fullname.setText(fullName);
         holder.major.setText(user.getMajor());
-        Glide.with(context).load(user.getAvatar()).into(holder.profileImage);
+        if (user.getAvatar() != null && !user.getAvatar().isEmpty()) {
+            Glide.with(context).load(user.getAvatar()).into(holder.profileImage);
+        } else {
+            // Use a default avatar image if the user doesn't have one
+            holder.profileImage.setImageResource(R.drawable.user);
+        }
+
     }
 
     @Override

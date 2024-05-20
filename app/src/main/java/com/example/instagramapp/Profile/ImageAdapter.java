@@ -60,12 +60,10 @@ public class ImageAdapter extends BaseAdapter {
         //gán giá trị
         ImagePostDTO imagePostDTO = listImagePostDTO.get(position);
 
-        //imagePic.set(post.getPostImage());
-        //Picasso.load(post.getPostImage()).into(imagePic);
         Glide.with(context)
                 .load(imagePostDTO.getPostImage())
                 .into(imagePic);
-//trả về view
+        //trả về view
         return convertView;
 
     }
