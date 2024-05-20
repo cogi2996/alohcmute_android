@@ -20,13 +20,10 @@
             android:name=".OTPActivity"
             android:exported="false" />
         <activity
-            android:name=".OTPActicity"
-            android:exported="false" />
-        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
-            android:name=".Home"
+            android:name=".SinglePostActivity"
             android:exported="false" />
         <activity android:name=".Stories.StoryActivity" />
         <activity android:name=".Stories.AddStoryActivity" />
@@ -41,7 +38,7 @@
             android:name=".RegisterActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".SinglePostActivity"
+            android:name=".Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
