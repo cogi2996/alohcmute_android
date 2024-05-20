@@ -3,11 +3,13 @@ package com.example.instagramapp.retrofit;
 import com.example.instagramapp.ModelAPI.Account;
 import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
+import com.example.instagramapp.ModelAPI.CheckedLikeResponse;
 import com.example.instagramapp.ModelAPI.CurrentUserResponse;
 import com.example.instagramapp.ModelAPI.Department;
 import com.example.instagramapp.ModelAPI.DepartmentResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
 import com.example.instagramapp.ModelAPI.MajorResponse;
+import com.example.instagramapp.ModelAPI.Post;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.ModelAPI.UserResponse;
@@ -75,5 +77,12 @@ public interface APIService {
 
     @POST("auth/register")
     Call<AuthenticationResponse> register(@Body Account accountDTO);
+
+    // find one post
+    @GET("posts/{postId}")
+    Call<Post> getPostById(@Path("postId") int postId);
+
+    @GET("posts/{postId}/like/check")
+    Call<CheckedLikeResponse> checkUserLikePost(@Path("postId") int postId);
 
 }
