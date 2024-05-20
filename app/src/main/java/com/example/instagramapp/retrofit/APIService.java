@@ -62,11 +62,6 @@ public interface APIService {
             @Query("pageSize") int pageSize
     );
 
-    @GET("users")
-    Call<List<User>> getAllUsers(@Query("pageNum") int pageNum,
-                                 @Query("pageSize") int pageSize);
-
-
     // like
     @POST("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> likePost(@Path("userId") int userId, @Path("postId") int postId);
@@ -75,13 +70,6 @@ public interface APIService {
     @DELETE("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
 
-    //tin
-    @GET("users/search")
-    Call<UserResponse> searchUserByName(
-            @Query("name") String name,
-            @Query("pageNum") int pageNum,
-            @Query("pageSize") int pageSize
-    );
     @POST("users/current")
     Call<CurrentUserResponse> getCurrentUser();
 
@@ -92,12 +80,7 @@ public interface APIService {
     @GET("users/{userId}")
     Call<CurrentUserResponse> getUserById(@Path("userId") int userId);
 
-    // like
-    @POST("users/{userId}/likeList/posts/{postId}")
-    Call<LikePostResponse> likePost(@Path("userId") int userId, @Path("postId") int postId);
-    // unlike post
-    @DELETE("users/{userId}/likeList/posts/{postId}")
-    Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
+
     // find all department
     @GET("department")
     Call<DepartmentResponse> getAllDepartment();
