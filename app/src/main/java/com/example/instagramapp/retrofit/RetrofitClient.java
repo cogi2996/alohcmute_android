@@ -27,14 +27,14 @@ public class RetrofitClient {
             okHttpClient = new OkHttpClient.Builder()
                     .build();
         }
-            retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.56.1:8080/api/v1/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(okHttpClient)
-                    .build();
-
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://192.168.56.1:8080/api/v1/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
         return retrofit;
     }
+
     public static Retrofit getRetrofit() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
@@ -44,9 +44,5 @@ public class RetrofitClient {
         }
         return retrofit;
     }
-
-
-
-
 
 }

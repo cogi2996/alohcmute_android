@@ -97,14 +97,7 @@ public class Login extends AppCompatActivity {
             });
 
 
-            createacc.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Login.this, Registration.class);
-                    startActivity(intent);
-                    finish();
-                }
-            });
+
 
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();

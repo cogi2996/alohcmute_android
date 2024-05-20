@@ -14,13 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstagramApp"
         tools:targetApi="31">
-        <activity android:name=".Stories.StoryActivity" />
-        <activity android:name=".Stories.AddStoryActivity" />
-        <activity android:name=".Profile.FollowersFollowing" />
+        <activity android:name=".Profile.Followers" />
         <activity android:name=".Search.UserSearchProfileActivity" />
         <activity android:name=".Post.PostActivity" />
         <activity android:name=".VerifyPhone" />
-        <activity android:name=".Registration" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Profile.Account_Settings" />
         <activity
