@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramapp.ModelAPI.SingleUserResponse;
 import com.example.instagramapp.ModelAPI.Users;
 import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.retrofit.APIService;
@@ -147,11 +148,11 @@ public class MessageActivity extends AppCompatActivity {
 
     private void loadUserFromApi(String myId, String userId) {
 
-        APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        Call<UserResponse> call = apiService.getUser(userId);
-        call.enqueue(new Callback<UserResponse>() {
+        APIService apiService = RetrofitClient.getRetrofitAuth(MessageActivity.this).create(APIService.class);
+        Call<SingleUserResponse> call = apiService.getUser(userId);
+        call.enqueue(new Callback<SingleUserResponse>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<SingleUserResponse> call, Response<SingleUserResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Users user = response.body().getUser();
                     userid = user.getUserId();
@@ -170,7 +171,7 @@ public class MessageActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(Call<SingleUserResponse> call, Throwable t) {
                 // Xử lý lỗi nếu có
             }
         });

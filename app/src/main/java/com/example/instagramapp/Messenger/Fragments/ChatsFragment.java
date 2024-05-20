@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.instagramapp.Messenger.Adapter.ChatAdapter;
 import com.example.instagramapp.Messenger.Model.Chat;
+import com.example.instagramapp.ModelAPI.SingleUserResponse;
 import com.example.instagramapp.ModelAPI.Users;
 import com.example.instagramapp.R;
 import com.example.instagramapp.ModelAPI.UserResponse;
@@ -55,7 +56,7 @@ public class ChatsFragment extends Fragment {
         userList = new ArrayList<>();
 
         userId = "16";
-        myId = "41";
+        myId = "42";
 
         userRef = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -83,11 +84,11 @@ public class ChatsFragment extends Fragment {
     }
 
     private void loadUserFromApi(String userId) {
-        APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        Call<UserResponse> call = apiService.getUser(userId);
-        call.enqueue(new Callback<UserResponse>() {
+        APIService apiService = RetrofitClient.getRetrofitAuth(getContext()).create(APIService.class);
+        Call<SingleUserResponse> call = apiService.getUser(userId);
+        call.enqueue(new Callback<SingleUserResponse>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<SingleUserResponse> call, Response<SingleUserResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Users user = response.body().getUser();
                     userRef.child(userId).setValue(user).addOnCompleteListener(task -> {
@@ -102,7 +103,7 @@ public class ChatsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(Call<SingleUserResponse> call, Throwable t) {
                 Toast.makeText(getContext(), "Failed to load user from API", Toast.LENGTH_SHORT).show();
             }
         });

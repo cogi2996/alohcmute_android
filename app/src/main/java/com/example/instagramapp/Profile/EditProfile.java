@@ -18,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramapp.ModelAPI.SingleUserResponse;
 import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.retrofit.APIService;
 import com.example.instagramapp.retrofit.RetrofitClient;
@@ -56,7 +57,7 @@ public class EditProfile extends AppCompatActivity {
         });
 
         userId = (TextView) findViewById(R.id.userId);
-        userId.setText(String.valueOf(41));
+        userId.setText(String.valueOf(42));
 
         mProfilePhoto = (ImageView) findViewById(R.id.user_img);
         firstName = (EditText) findViewById(R.id.firstName);
@@ -72,7 +73,7 @@ public class EditProfile extends AppCompatActivity {
 
         submit = (TextView) findViewById(R.id.btnDone);
 
-        final UserResponse updatedUser = new UserResponse();
+        final SingleUserResponse updatedUser = new SingleUserResponse();
         getUserData(userId.getText().toString());
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -110,12 +111,14 @@ public class EditProfile extends AppCompatActivity {
     }
 
     private void getUserData(String userId) {
-        APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        Call<UserResponse> call = apiService.getUser(userId);
+        APIService apiService = RetrofitClient.getRetrofitAuth(EditProfile.this).create(APIService.class);
+        Call<SingleUserResponse> call = apiService.getUser(userId);
 
-        call.enqueue(new Callback<UserResponse>() {
+        call.enqueue(new Callback<SingleUserResponse>() {
             @Override
-            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+            public void onResponse(Call<SingleUserResponse> call, Response<SingleUserResponse> response) {
+                Log.d("url", call.request().url().toString());
+                Log.d("url", response.raw().toString());
                 if (response.isSuccessful()) {
                     Users userResponse = response.body().getUser();
                     // Now you can use the userResponse object to update your UI
@@ -145,7 +148,7 @@ public class EditProfile extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserResponse> call, Throwable t) {
+            public void onFailure(Call<SingleUserResponse> call, Throwable t) {
                 // Handle the error
 //                Log.d("test", "here3");
                 Toast.makeText(EditProfile.this, "Error", Toast.LENGTH_SHORT);
@@ -155,7 +158,7 @@ public class EditProfile extends AppCompatActivity {
 //        Log.d("test", "here4");
     }
 
-    private void callPutUpdateProfile(UserResponse users) {
+    private void callPutUpdateProfile(SingleUserResponse users) {
 
         if (imageUri != null) {
             storageReference = FirebaseStorage.getInstance().getReference();
@@ -170,10 +173,10 @@ public class EditProfile extends AppCompatActivity {
                             user.setAvatar(uri.toString());
                             users.setUser(user);
                             APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
-                            Call<UserResponse> call = apiService.getEditProfile(users.getUser());
-                            call.enqueue(new Callback<UserResponse>() {
+                            Call<SingleUserResponse> call = apiService.getEditProfile(users.getUser());
+                            call.enqueue(new Callback<SingleUserResponse>() {
                                 @Override
-                                public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                                public void onResponse(Call<SingleUserResponse> call, Response<SingleUserResponse> response) {
                                     Toast.makeText(EditProfile.this, "Profile Update", Toast.LENGTH_SHORT);
                                     storageReference = FirebaseStorage.getInstance().getReference();
                                     submit.setVisibility(View.GONE);
@@ -186,7 +189,7 @@ public class EditProfile extends AppCompatActivity {
                                 }
 
                                 @Override
-                                public void onFailure(Call<UserResponse> call, Throwable throwable) {
+                                public void onFailure(Call<SingleUserResponse> call, Throwable throwable) {
                                     Toast.makeText(EditProfile.this, "Error", Toast.LENGTH_SHORT);
                                 }
                             });
