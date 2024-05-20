@@ -102,4 +102,6 @@ public interface APIService {
     @GET("posts/{postId}/like/check")
     Call<CheckedLikeResponse> checkUserLikePost(@Path("postId") int postId);
 
+
+
 }
