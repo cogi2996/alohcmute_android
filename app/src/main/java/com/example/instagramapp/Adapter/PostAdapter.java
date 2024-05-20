@@ -72,7 +72,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                 .into(holder.postImage);
         holder.liked.setOnClickListener(v -> holder.toggleLike());
         holder.btn_comment.setOnClickListener(v -> {
-            // go to comment activity
+            // go to comment activity sdd
             Intent intent = new Intent(context, CommentsActivity.class);
             Log.d("jksdjfjjj", "onBindViewHolder: "+post.getPostId());
             intent.putExtra("postId", String.valueOf(post.getPostId()));
