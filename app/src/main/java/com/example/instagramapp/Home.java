@@ -14,9 +14,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.example.instagramapp.Like.LikeFragment;
 import com.example.instagramapp.Post.PostActivity;
-import com.example.instagramapp.Profile.ProfileFragment;
+
 import com.example.instagramapp.Search.SearchFragment;
-import com.example.instagramapp.home.HomeFragment;
+import com.example.instagramapp.Profile.ProfileFragment;
 
 public class Home extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -27,13 +27,7 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
         BottomNavigationView navigationView = findViewById(R.id.insta_bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(this);
         String name = getIntent().getStringExtra("PAGE");
-        if (name != null) {
-            loadfragment(new HomeFragment());
 
-        } else {
-            loadfragment(new HomeFragment());
-
-        }
 
     }
 
@@ -50,9 +44,8 @@ public class Home extends AppCompatActivity implements BottomNavigationView.OnNa
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
         int itemId = item.getItemId();
-        if (itemId == R.id.Home) {
-            fragment = new HomeFragment();
-        } else if (itemId == R.id.search) {
+
+        if (itemId == R.id.search) {
             fragment = new SearchFragment();
         } else if (itemId == R.id.post) {
             fragment = null;

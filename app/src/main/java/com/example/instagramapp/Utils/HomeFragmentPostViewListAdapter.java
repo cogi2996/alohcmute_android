@@ -1,7 +1,6 @@
 package com.example.instagramapp.Utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -18,6 +17,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.instagramapp.models.Users;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,7 +40,6 @@ import com.example.instagramapp.R;
 import com.example.instagramapp.models.Comments;
 import com.example.instagramapp.models.Likes;
 import com.example.instagramapp.models.Photo;
-import com.example.instagramapp.models.Users;
 
 public class HomeFragmentPostViewListAdapter extends ArrayAdapter<Photo> {
 

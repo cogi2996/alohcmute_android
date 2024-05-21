@@ -68,45 +68,36 @@ public class Login extends AppCompatActivity {
                         mDialog.setCancelable(false);
                         mDialog.setMessage("Logging in...");
                         mDialog.show();
-                        signupInToServer();
+                        FAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    mDialog.dismiss();
+                                    if (FAuth.getCurrentUser().isEmailVerified()) {
+                                        mDialog.dismiss();
+                                        Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
+                                        signupInToServer();
+//                                        Intent z = new Intent(Login.this, Home.class);
+//                                        startActivity(z);
+//                                        finish();
+                                    } else {
+                                        ReusableCodeForAll.ShowAlert(Login.this, "", "Please Verify your Email");
+                                    }
 
-//                        FAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<AuthResult> task) {
-//                                if (task.isSuccessful()) {
-//                                    mDialog.dismiss();
-//                                    if (FAuth.getCurrentUser().isEmailVerified()) {
-//                                        mDialog.dismiss();
-//                                        Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
-//                                        signupInToServer();
-////                                        Intent z = new Intent(Login.this, Home.class);
-////                                        startActivity(z);
-////                                        finish();
-//                                    } else {
-//                                        ReusableCodeForAll.ShowAlert(Login.this, "", "Please Verify your Email");
-//                                    }
-//
-//                                } else {
-//
-//                                    mDialog.dismiss();
-//                                    ReusableCodeForAll.ShowAlert(Login.this, "Error", task.getException().getMessage());
-//                                }
-//                            }
-//                        });
+                                } else {
+
+                                    mDialog.dismiss();
+                                    ReusableCodeForAll.ShowAlert(Login.this, "Error", task.getException().getMessage());
+                                }
+                            }
+                        });
 
                     }
                 }
             });
 
 
-            createacc.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    Intent intent = new Intent(Login.this, Registration.class);
-//                    startActivity(intent);
-//                    finish();
-                }
-            });
+
 
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -161,7 +152,6 @@ public class Login extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
                 SharedPreferences.Editor myEdit = sharedPreferences.edit();
                 myEdit.putString("access_token", access_token);
-
                 myEdit.apply();
                 // save in shared preferences
                 Intent z = new Intent(Login.this, Home.class);

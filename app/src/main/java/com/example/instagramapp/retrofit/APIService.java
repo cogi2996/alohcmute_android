@@ -3,14 +3,19 @@ package com.example.instagramapp.retrofit;
 import com.example.instagramapp.ModelAPI.Account;
 import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
+import com.example.instagramapp.ModelAPI.FollowResponse;
+import com.example.instagramapp.ModelAPI.UserResponse;
+import com.example.instagramapp.ModelAPI.Users;
 import com.example.instagramapp.ModelAPI.ChangePasswordRespone;
 import com.example.instagramapp.ModelAPI.ResetPassword;
 import com.example.instagramapp.ModelAPI.SingleUserResponse;
 import com.example.instagramapp.ModelAPI.Users;
 import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
+import com.example.instagramapp.ModelAPI.PostByIdResponse;
 import com.example.instagramapp.ModelAPI.ResponseDTO;
 import com.example.instagramapp.ModelAPI.User;
+import com.example.instagramapp.ModelAPI.UserResponse;
 
 import java.util.List;
 import com.example.instagramapp.ModelAPI.CheckedLikeResponse;
@@ -62,10 +67,18 @@ public interface APIService {
             @Query("pageSize") int pageSize
     );
 
+    @GET("users")
+    Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
+                                  @Query("pageSize") int pageSize);
+
+    @PATCH(value = "users")
+    Call<UserResponse> getEditProfile(@Body User user);
+
+
+
     // like
     @POST("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> likePost(@Path("userId") int userId, @Path("postId") int postId);
-
     // unlike post
     @DELETE("users/{userId}/likeList/posts/{postId}")
     Call<LikePostResponse> unlikePost(@Path("userId") int userId, @Path("postId") int postId);
@@ -73,9 +86,7 @@ public interface APIService {
     @POST("users/current")
     Call<CurrentUserResponse> getCurrentUser();
 
-    @GET("users")
-    Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
-                                  @Query("pageSize") int pageSize);
+
     //find user by id
     @GET("users/{userId}")
     Call<CurrentUserResponse> getUserById(@Path("userId") int userId);
@@ -104,4 +115,16 @@ public interface APIService {
 
 
 
+
+    @GET("users/{id}/followers")
+    Call<FollowResponse> getFollowers(@Path("id") int id);
+    @GET("users/{id}/followings")
+    Call<FollowResponse> getFollowings(@Path("id") int id,
+                                       @Query("pageNum") int pageNum,
+                                       @Query("pageSize") int pageSize);
+
+    @GET("users/{userId}/posts")
+    Call<PostByIdResponse> getUserPosts(
+            @Path("userId") int userId,
+            @Query("pageNum") int pageNum);
 }
