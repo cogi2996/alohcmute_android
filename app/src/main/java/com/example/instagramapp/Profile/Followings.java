@@ -40,7 +40,7 @@ public class Followings extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         apiService = RetrofitClient.getRetrofitAuth(Followings.this).create(APIService.class);
-        apiService.getFollowings(15,0,20).enqueue(new Callback<FollowResponse>() {
+        apiService.getFollowings(41,0,20).enqueue(new Callback<FollowResponse>() {
 
 
             @Override
