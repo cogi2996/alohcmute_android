@@ -168,7 +168,6 @@ public class ProfileFragment extends Fragment {
                                     .load(user.getAvatar())
                                     .into(profilePhoto);
                         } else {
-                            // Use a default avatar image if the user doesn't have one
                             profilePhoto.setImageResource(R.drawable.user);
                         }
 
