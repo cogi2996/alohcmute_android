@@ -21,11 +21,12 @@ import com.bumptech.glide.Glide;
 import com.example.instagramapp.ModelAPI.ImagePostDTO;
 import com.example.instagramapp.ModelAPI.Post;
 import com.example.instagramapp.ModelAPI.PostByIdResponse;
+import com.example.instagramapp.ModelAPI.SingleUserResponse;
 import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.ModelAPI.UserResponse_findOne;
+import com.example.instagramapp.ModelAPI.Users;
 import com.example.instagramapp.Search.SearchUserAdapter;
-import com.example.instagramapp.Utils.GridImageAdapter;
 import com.example.instagramapp.retrofit.APIService;
 import com.example.instagramapp.retrofit.RetrofitClient;
 import com.google.firebase.database.DatabaseReference;
@@ -80,7 +81,7 @@ public class ProfileFragment extends Fragment {
         following = (LinearLayout) v.findViewById(R.id.FragmentProfile_followingLinearLayout);
         mProgressBar = (ProgressBar) v.findViewById(R.id.profileProgressBar);
         getUserData(userId.getText().toString());
-        loadImagePost(17, 0);
+        loadImagePost(41, 0);
 
         account_setting_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,13 +152,13 @@ public class ProfileFragment extends Fragment {
 
     private void getUserData(String userId) {
         APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        apiService.getUser(String.valueOf(41)).enqueue(new Callback<UserResponse_findOne>() {
+        apiService.getUser(String.valueOf(41)).enqueue(new Callback<SingleUserResponse>() {
             @Override
-            public void onResponse(Call<UserResponse_findOne> call, Response<UserResponse_findOne> response) {
+            public void onResponse(Call<SingleUserResponse> call, Response<SingleUserResponse> response) {
                 if (response.isSuccessful()) {
-                    UserResponse_findOne userResponse = response.body();
+                    SingleUserResponse userResponse = response.body();
                     if (userResponse != null && userResponse.getMessage().equals("success")) {
-                        User user = userResponse.getUser();
+                        Users user = userResponse.getUser();
                         String profileName = user.getLastName() + user.getMidName() + user.getFirstName();
                         username.setText(profileName);
                         name.setText(user.getFirstName());
@@ -177,7 +178,7 @@ public class ProfileFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<UserResponse_findOne> call, Throwable throwable) {
+            public void onFailure(Call<SingleUserResponse> call, Throwable throwable) {
             }
         });
     }

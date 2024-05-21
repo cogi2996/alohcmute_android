@@ -16,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InstagramApp"
-        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".SavePostActivity"
@@ -28,22 +27,13 @@
             android:name=".Login"
             android:exported="false" />
 
-        <activity
-            android:name=".SinglePostActivity"
-            android:exported="false" />
-        <activity android:name=".Stories.StoryActivity" />
-        <activity android:name=".Stories.AddStoryActivity" />
         <activity android:name=".Profile.Followers" />
         <activity android:name=".Search.UserSearchProfileActivity" />
         <activity android:name=".Post.PostActivity" />
 <!--        <activity android:name=".VerifyPhone" />-->
         <activity android:name=".MainActivity" />
-        <activity android:name=".RegisterActivity" />
         <activity android:name=".Profile.Account_Settings" />
 
-        <activity
-            android:name=".Profile.EditProfile"
-            android:exported="false" />
         <activity
             android:name=".Home"
             android:exported="true"
@@ -54,9 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Profile.ResetPasswordUser"
-            android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"

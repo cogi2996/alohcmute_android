@@ -3,9 +3,9 @@ package com.example.instagramapp.retrofit;
 import com.example.instagramapp.ModelAPI.Account;
 import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
+import com.example.instagramapp.ModelAPI.FollowResponse;
 import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.ModelAPI.Users;
-import com.example.instagramapp.models.ResponseDTO;
 import com.example.instagramapp.ModelAPI.ChangePasswordRespone;
 import com.example.instagramapp.ModelAPI.ResetPassword;
 import com.example.instagramapp.ModelAPI.SingleUserResponse;
@@ -70,14 +70,11 @@ public interface APIService {
     @GET("users")
     Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
                                   @Query("pageSize") int pageSize);
-    @GET("users/{id}")
-    Call<UserResponse_findOne> getUser(@Path("id") String id);
 
     @PATCH(value = "users")
     Call<UserResponse> getEditProfile(@Body User user);
 
-    @GET("users/{id}/followers")
-    Call<FollowResponse> getFollowers(@Path("id") int id);
+
 
     // like
     @POST("users/{userId}/likeList/posts/{postId}")
@@ -89,9 +86,7 @@ public interface APIService {
     @POST("users/current")
     Call<CurrentUserResponse> getCurrentUser();
 
-    @GET("users")
-    Call<List<User>> getAllUsers( @Query("pageNum") int pageNum,
-                                  @Query("pageSize") int pageSize);
+
     //find user by id
     @GET("users/{userId}")
     Call<CurrentUserResponse> getUserById(@Path("userId") int userId);

@@ -18,10 +18,11 @@ import com.bumptech.glide.Glide;
 import com.example.instagramapp.ModelAPI.ImagePostDTO;
 import com.example.instagramapp.ModelAPI.Post;
 import com.example.instagramapp.ModelAPI.PostByIdResponse;
+import com.example.instagramapp.ModelAPI.SingleUserResponse;
 import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.ModelAPI.UserResponse_findOne;
+import com.example.instagramapp.ModelAPI.Users;
 import com.example.instagramapp.Profile.ImageAdapter;
-import com.example.instagramapp.Profile.ProfileFragment;
 import com.example.instagramapp.retrofit.APIService;
 import com.example.instagramapp.retrofit.RetrofitClient;
 import com.google.firebase.database.DatabaseReference;
@@ -124,13 +125,13 @@ public class UserSearchProfileActivity extends AppCompatActivity {
     }
     private void getUserData(String userId) {
         APIService apiService = RetrofitClient.getRetrofit().create(APIService.class);
-        apiService.getUser(String.valueOf(41)).enqueue(new Callback<UserResponse_findOne>() {
+        apiService.getUser(String.valueOf(41)).enqueue(new Callback<SingleUserResponse>() {
             @Override
-            public void onResponse(Call<UserResponse_findOne> call, Response<UserResponse_findOne> response) {
+            public void onResponse(Call<SingleUserResponse> call, Response<SingleUserResponse> response) {
                 if (response.isSuccessful()) {
-                    UserResponse_findOne userResponse = response.body();
+                    SingleUserResponse userResponse = response.body();
                     if (userResponse != null && userResponse.getMessage().equals("success")) {
-                        User user = userResponse.getUser();
+                        Users user = userResponse.getUser();
                         String profileName = user.getLastName() + user.getMidName() + user.getFirstName();
                         username.setText(profileName);
                         name.setText(user.getFirstName());
@@ -145,7 +146,7 @@ public class UserSearchProfileActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserResponse_findOne> call, Throwable throwable) {
+            public void onFailure(Call<SingleUserResponse> call, Throwable throwable) {
             }
         });
     }

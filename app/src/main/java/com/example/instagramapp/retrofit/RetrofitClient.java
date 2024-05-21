@@ -13,9 +13,6 @@ public class RetrofitClient {
     public static AuthInterceptor authInterceptor;
     private static OkHttpClient okHttpClient;
 
-    public static Retrofit getRetrofitAuth() {
-        if (retrofit == null) {
-            OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
 
     public static Retrofit getRetrofitAuth(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
