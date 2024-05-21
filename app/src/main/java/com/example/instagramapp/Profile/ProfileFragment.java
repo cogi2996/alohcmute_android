@@ -50,8 +50,6 @@ public class ProfileFragment extends Fragment {
     GridView gridView;
     TextView posts, followers, followings, name, biography, department, username, userId;
     LinearLayout follower, following;
-    String noFollowers, noFollowings;
-    DatabaseReference databaseReference;
     private ProgressBar mProgressBar;
     private List<User> mUser;
     private List<Post> mPost;
