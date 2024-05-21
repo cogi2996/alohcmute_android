@@ -24,7 +24,6 @@ import com.example.instagramapp.ModelAPI.PostByIdResponse;
 import com.example.instagramapp.ModelAPI.SingleUserResponse;
 import com.example.instagramapp.ModelAPI.User;
 import com.example.instagramapp.ModelAPI.UserResponse;
-import com.example.instagramapp.ModelAPI.UserResponse_findOne;
 import com.example.instagramapp.ModelAPI.Users;
 import com.example.instagramapp.Search.SearchUserAdapter;
 import com.example.instagramapp.retrofit.APIService;
