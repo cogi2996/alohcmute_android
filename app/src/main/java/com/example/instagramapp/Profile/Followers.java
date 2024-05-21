@@ -35,7 +35,7 @@ public class Followers extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         apiService = RetrofitClient.getRetrofitAuth(Followers.this).create(APIService.class);
-        apiService.getFollowers(15).enqueue(new Callback<FollowResponse>() {
+        apiService.getFollowers(41).enqueue(new Callback<FollowResponse>() {
             @Override
             public void onResponse(Call<FollowResponse> call, Response<FollowResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
