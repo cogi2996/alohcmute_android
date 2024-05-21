@@ -50,7 +50,6 @@ dependencies {
     implementation(libs.firebase.bom)
     implementation(libs.firebase.iid)
     implementation(libs.lombok)
-    implementation(libs.picasso)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

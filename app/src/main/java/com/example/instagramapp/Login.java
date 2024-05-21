@@ -37,14 +37,13 @@ import retrofit2.Response;
 public class Login extends AppCompatActivity {
     APIService apiService;
 
-    TextView createacc;
+    TextView createacc,register;
     TextInputLayout Email, Pass;
     Button login;
-    TextView Forgotpassword;
-    TextView loginwithfacebook;
     FirebaseAuth FAuth;
     String email;
     String password;
+
 
 
     @Override
@@ -56,9 +55,18 @@ public class Login extends AppCompatActivity {
             Email = (TextInputLayout) findViewById(R.id.login_email);
             Pass = (TextInputLayout) findViewById(R.id.login_password);
             login = (Button) findViewById(R.id.Login_btn);
-            loginwithfacebook = (TextView) findViewById(R.id.login_facebook);
-            Forgotpassword = (TextView) findViewById(R.id.forgotpass);
-            FAuth = FirebaseAuth.getInstance();
+            register = (TextView) findViewById(R.id.layout_register);
+
+            register.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Login.this, RegisterActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+
 
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -197,7 +205,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onFailure(Call<AuthenticationResponse> call, Throwable throwable) {
                 Log.d("POINT2", "xxx ");
-
             }
 
 

@@ -4,8 +4,11 @@ import com.example.instagramapp.ModelAPI.Account;
 import com.example.instagramapp.ModelAPI.AuthenticationRequest;
 import com.example.instagramapp.ModelAPI.AuthenticationResponse;
 import com.example.instagramapp.ModelAPI.ChangePasswordRespone;
+import com.example.instagramapp.ModelAPI.FollowResponse;
+import com.example.instagramapp.ModelAPI.PostByIdResponse;
 import com.example.instagramapp.ModelAPI.ResetPassword;
 import com.example.instagramapp.ModelAPI.SingleUserResponse;
+import com.example.instagramapp.ModelAPI.UserResponse_findOne;
 import com.example.instagramapp.ModelAPI.Users;
 import com.example.instagramapp.ModelAPI.UserResponse;
 import com.example.instagramapp.ModelAPI.LikePostResponse;
@@ -121,5 +124,22 @@ public interface APIService {
     Call<CheckedLikeResponse> checkUserLikePost(@Path("postId") int postId);
     @POST("auth/register/OTP")
     Call<OTPResponse> registerOTP(@Body OTPRequest otp);
+
+    @GET("users/{id}/followers")
+    Call<FollowResponse> getFollowers(@Path("id") int id);
+    @GET("users/{id}/followings")
+    Call<FollowResponse> getFollowings(@Path("id") int id,
+                                       @Query("pageNum") int pageNum,
+                                       @Query("pageSize") int pageSize);
+
+    @GET("users/{userId}/posts")
+    Call<PostByIdResponse> getUserPosts(
+            @Path("userId") int userId,
+            @Query("pageNum") int pageNum);
+
+    @POST("auth/logout")
+    Call<Void> logout();
+
+
 
 }

@@ -84,7 +84,7 @@
             android:drawableLeft="@drawable/ic_edit_profile"
             android:drawableTint="@color/black"
             android:drawablePadding="10dp"
-            android:text="Edit Profile"
+            android:text="Đỗi mật khẩu"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:id="@+id/edit_profile"/>

@@ -143,6 +143,7 @@ public class HomeFragment extends Fragment {
                     Intent z = new Intent(getContext(), LockAccountActivity.class);
                     startActivity(z);
                     getActivity().finish();
+                  return;
                 }
                 List<Post> newPosts = responseDTO.getListPost();
                 listPost.addAll(newPosts);
